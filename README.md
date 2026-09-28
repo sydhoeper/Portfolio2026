@@ -6,6 +6,8 @@ A senior product design portfolio built from the visual system and case-study st
 
 - A responsive main page with Syd's positioning, background, working style, and contact details
 - Five complete product-design case studies with their original imagery and media
+- Sarah Doody-inspired case-study architecture: overview, problem, users, role, constraints, process, outcomes, and lessons
+- Three evidence-led featured projects on the homepage, with the remaining work available in navigation
 - A living local design-system page
 - Fraunces and Avenir typography, cream surfaces, pastel spectrum details, and the original spacing system
 - Accessible navigation, galleries, carousels, focus states, and reduced-motion support
