@@ -11,6 +11,7 @@ let toastTimer = null;
 
 const pageMap = {
     home: "pages/home.html",
+    about: "pages/home.html",
     "va-pdfs": "pages/User Experience Design/va-pdfs.html",
     "booking-platform": "pages/User Experience Design/booking-platform.html",
     "map-redesign": "pages/User Experience Design/map-redesign.html",
@@ -30,7 +31,7 @@ function setMobileNavigation(isOpen, { restoreFocus = false } = {}) {
     mobileNavigationToggle.setAttribute("aria-expanded", String(shouldOpen));
     mobileNavigationToggle.setAttribute(
         "aria-label",
-        shouldOpen ? "Close navigation menu" : "Open navigation menu"
+        shouldOpen ? "Close case studies menu" : "Open case studies menu"
     );
     navigationMenu.hidden = !shouldOpen;
     mobileNavigationOverlay.setAttribute("aria-hidden", String(!shouldOpen));
@@ -229,6 +230,12 @@ function finishPageLoad(pageName, focusContent) {
     updateActiveLink(pageName);
     document.title = "Syd Hoeper";
     window.scrollTo(0, 0);
+
+    if (pageName === "about") {
+        requestAnimationFrame(() => {
+            contentArea.querySelector("#about")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+    }
 
     if (focusContent) {
         const focusTarget = pageHeading || contentArea;

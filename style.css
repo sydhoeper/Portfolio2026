@@ -1910,17 +1910,19 @@ body::before {
 
 .top-navigation .mobile-nav-toggle {
     position: relative;
-    display: grid;
-    width: 44px;
+    display: inline-flex;
+    width: auto;
     height: 44px;
     flex: 0 0 auto;
-    padding: 0;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.65rem 0.85rem;
     border: 0;
-    border-radius: 50%;
+    border-radius: var(--radius-pill);
     background: transparent;
     color: var(--color-dark);
     cursor: pointer;
-    place-items: center;
     transition: background-color var(--transition-ui), transform var(--transition-ui);
 }
 
@@ -1928,6 +1930,62 @@ body::before {
 .top-navigation .mobile-nav-toggle:focus-visible {
     background: rgba(var(--color-dark-rgb), 0.08);
     transform: scale(1.04);
+}
+
+.top-navigation .navigation-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.top-navigation .nav-action,
+.top-navigation .navigation .nav-action {
+    width: auto;
+    min-height: 44px;
+    margin: 0;
+    padding: 0.65rem 0.85rem;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--color-dark);
+    font-size: 0.92rem;
+    font-weight: 650;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color var(--transition-ui), color var(--transition-ui), transform var(--transition-ui);
+}
+
+.top-navigation .nav-action:hover,
+.top-navigation .nav-action:focus-visible {
+    background: rgba(var(--color-dark-rgb), 0.08);
+    color: var(--color-dark);
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.top-navigation .navigation .resume-nav-link {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    background: var(--color-dark);
+    color: var(--color-background);
+}
+
+.top-navigation .navigation .resume-nav-link:hover,
+.top-navigation .navigation .resume-nav-link:focus-visible {
+    background: var(--color-accent);
+    color: white;
+}
+
+.navigation-caret {
+    font-size: 1.05rem;
+    line-height: 0.7;
+    transition: transform 180ms ease;
+}
+
+.mobile-navigation-open .navigation-caret {
+    transform: rotate(180deg);
 }
 
 .top-navigation .mobile-nav-icon,
@@ -2086,7 +2144,7 @@ body.mobile-navigation-open {
     }
 
     .top-navigation .mobile-nav-toggle {
-        width: 44px;
+        width: auto;
         height: 44px;
     }
 
@@ -2101,6 +2159,27 @@ body.mobile-navigation-open {
 
 @media screen and (max-width: 480px) {
     .top-navigation .site-title-name {
-        font-size: 25px;
+        font-size: 22px;
+    }
+
+    .top-navigation .navigation-header {
+        gap: 0.3rem;
+        padding-left: 14px;
+    }
+
+    .top-navigation .navigation-actions {
+        gap: 0;
+    }
+
+    .top-navigation .nav-action,
+    .top-navigation .navigation .nav-action {
+        padding-right: 0.55rem;
+        padding-left: 0.55rem;
+        font-size: 0.78rem;
+    }
+
+    .top-navigation .resume-nav-link {
+        padding-right: 0.7rem;
+        padding-left: 0.7rem;
     }
 }
