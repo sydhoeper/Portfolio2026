@@ -1,0 +1,1322 @@
+<style>
+    .map-case-study {
+        --map-card: rgba(252, 250, 246, 0.94);
+        width: 100%;
+        max-width: 980px;
+        container: map-case-study / inline-size;
+    }
+
+    .map-case-study * {
+        box-sizing: border-box;
+    }
+
+    .map-case-study h1,
+    .map-case-study h2 {
+        font-family: var(--font-display);
+        font-optical-sizing: auto;
+    }
+
+    .map-hero,
+    .map-section {
+        padding: clamp(3.5rem, 8vw, 7rem) 0;
+    }
+
+    .map-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(280px, 1.1fr);
+        align-items: center;
+        gap: clamp(2.5rem, 6vw, 5rem);
+        margin-bottom: -6rem;
+        padding-top: 0;
+    }
+
+    .map-eyebrow,
+    .map-step-label {
+        display: block;
+        margin: 0 0 0.85rem;
+        color: var(--color-muted);
+        font-size: var(--type-eyebrow-size);
+        font-weight: var(--type-eyebrow-weight);
+        line-height: var(--type-eyebrow-line-height);
+        letter-spacing: var(--type-eyebrow-spacing);
+        text-transform: uppercase;
+    }
+
+    .map-step-label {
+        color: var(--color-muted);
+    }
+
+    .map-hero h1 {
+        max-width: 12ch;
+        margin: 0 0 1.25rem;
+        font-size: var(--type-hero-size);
+        line-height: var(--type-hero-line-height);
+        letter-spacing: var(--type-hero-spacing);
+    }
+
+    .map-lede {
+        max-width: 48ch;
+        margin: 0;
+        font-size: var(--type-lede-size);
+        line-height: var(--type-lede-line-height);
+    }
+
+    .map-section {
+        border-top: 1px solid rgba(var(--color-dark-rgb), 0.16);
+    }
+
+    .map-section-heading {
+        display: grid;
+        grid-template-columns: minmax(160px, 0.36fr) minmax(0, 1fr);
+        gap: clamp(2rem, 6vw, 5rem);
+        align-items: start;
+        margin-bottom: clamp(2.5rem, 6vw, 5rem);
+    }
+
+    .map-section-heading:has(+ .map-section-disclosure) {
+        margin-bottom: clamp(1rem, 2vw, 1.5rem);
+    }
+
+    .map-section-heading:has(+ .map-role) {
+        margin-bottom: 0;
+    }
+
+    .map-section-heading:has(+ .map-overview-details) {
+        margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+    }
+
+    .map-section-heading h2 {
+        margin: 0;
+        font-size: var(--type-section-heading-size);
+        line-height: var(--type-section-heading-line-height);
+        letter-spacing: var(--type-section-heading-spacing);
+    }
+
+    .map-section-heading p {
+        max-width: 58ch;
+        margin: 0;
+        font-size: var(--type-section-copy-size);
+        line-height: var(--type-section-copy-line-height);
+    }
+
+    .map-solution-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: clamp(1.25rem, 2.5vw, 2rem);
+        align-items: start;
+    }
+
+    .map-solution-copy {
+        display: grid;
+        grid-template-columns: minmax(160px, 0.36fr) minmax(0, 1fr);
+        gap: clamp(2rem, 6vw, 5rem);
+        align-items: start;
+    }
+
+    .map-solution-copy h2 {
+        margin: 0;
+        font-size: var(--type-section-heading-size);
+        line-height: var(--type-section-heading-line-height);
+        letter-spacing: var(--type-section-heading-spacing);
+    }
+
+    .map-solution-copy p {
+        max-width: 38ch;
+        margin: 0;
+        font-size: var(--type-section-copy-size);
+        line-height: var(--type-section-copy-line-height);
+    }
+
+    .map-card-grid,
+    .map-process-grid,
+    .map-outcome-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(1rem, 3vw, 1.75rem);
+    }
+
+    .map-card-grid.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .map-card,
+    .map-impact-card,
+    .map-quote {
+        padding: var(--card-padding);
+        border-radius: var(--card-radius);
+        background: var(--surface-card);
+        box-shadow: var(--shadow-card);
+    }
+
+    .map-card h3,
+    .map-role h3,
+    .map-overview-subsection h3,
+    .map-impact-card h3,
+    .map-copy h3,
+    .map-decision-copy h3 {
+        margin: 0 0 0.65rem;
+        font-size: var(--card-heading-size);
+        line-height: var(--card-heading-line-height);
+    }
+
+    .map-card p,
+    .map-copy p,
+    .map-decision-copy p {
+        margin: 0;
+        line-height: 1.65;
+    }
+
+    .map-card ul,
+    .map-role ul,
+    .map-impact-card ul,
+    .map-outcomes ul,
+    .map-decision-copy ul {
+        margin: 0.65rem 0 0;
+        padding-left: 1.2rem;
+        line-height: 1.6;
+    }
+
+    .map-role {
+        width: calc(100% - var(--case-study-content-inset));
+        max-width: 58ch;
+        margin: clamp(1.25rem, 2.5vw, 2rem) 0 clamp(2rem, 4vw, 3rem) var(--case-study-content-inset);
+    }
+
+    .map-role p {
+        margin: 0;
+        line-height: var(--type-section-copy-line-height);
+    }
+
+    .map-overview-subsection {
+        width: calc(100% - var(--case-study-content-inset));
+        max-width: 58ch;
+        margin-left: var(--case-study-content-inset);
+    }
+
+    .map-overview-subsection p {
+        margin: 0;
+        line-height: var(--type-section-copy-line-height);
+    }
+
+    .map-overview-details {
+        display: grid;
+        width: calc(100% - var(--case-study-content-inset));
+        max-width: 58ch;
+        grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+        gap: clamp(1.5rem, 4vw, 3rem);
+        margin: 0 0 clamp(2.5rem, 5vw, 4rem) var(--case-study-content-inset);
+    }
+
+    .map-overview-detail {
+        padding-top: 1rem;
+        border-top: 2px solid rgba(var(--color-dark-rgb), 0.2);
+    }
+
+    .map-overview-detail h3 {
+        margin: 0 0 0.65rem;
+        font-size: var(--card-heading-size);
+        line-height: var(--card-heading-line-height);
+    }
+
+    .map-overview-detail p,
+    .map-overview-detail ul {
+        margin: 0;
+        line-height: 1.55;
+    }
+
+    .map-overview-detail ul {
+        padding-left: 1.15rem;
+    }
+
+    .map-overview-detail li + li {
+        margin-top: 0.35rem;
+    }
+
+    .map-overview-goals {
+        margin-bottom: clamp(3rem, 6vw, 4rem);
+    }
+
+    .map-overview-current-state-copy {
+        margin-bottom: clamp(1.25rem, 3vw, 2rem);
+    }
+
+    .map-approach-framework {
+        display: grid;
+    }
+
+    .map-approach-item {
+        display: grid;
+        grid-template-columns: 3rem minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: clamp(1.25rem, 4vw, 3.5rem);
+        align-items: start;
+        padding: clamp(1.5rem, 3.5vw, 2.5rem) 0;
+        border-top: 1px solid rgba(var(--color-dark-rgb), 0.2);
+    }
+
+    .map-approach-number {
+        color: var(--color-muted);
+        font-size: var(--type-eyebrow-size);
+        font-weight: var(--type-eyebrow-weight);
+        letter-spacing: var(--type-eyebrow-spacing);
+    }
+
+    .map-approach-signal h3 {
+        margin: 0 0 0.65rem;
+        font-size: clamp(1.3rem, 2.7cqi, 1.75rem);
+        line-height: 1.25;
+    }
+
+    .map-approach-signal p,
+    .map-approach-response p {
+        margin: 0;
+        line-height: 1.65;
+    }
+
+    .map-approach-response {
+        padding-left: clamp(1rem, 2.5vw, 1.75rem);
+        border-left: 2px solid rgba(var(--color-dark-rgb), 0.18);
+    }
+
+    .map-approach-response .map-step-label {
+        margin-bottom: 0.55rem;
+    }
+
+    .map-goals-list {
+        display: grid;
+        gap: 0.75rem;
+        margin: 0;
+        padding-left: 1.2rem;
+        font-size: var(--type-section-copy-size);
+        line-height: var(--type-section-copy-line-height);
+    }
+
+    .map-challenge-table {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr 1fr;
+        overflow: hidden;
+        border: 1px solid rgba(var(--color-dark-rgb), 0.16);
+        border-radius: 16px;
+        background: var(--map-card);
+        box-shadow:
+            0 3px 8px rgba(var(--color-dark-rgb), 0.11),
+            0 12px 30px rgba(var(--color-dark-rgb), 0.08);
+    }
+
+    .map-table-row {
+        display: contents;
+    }
+
+    .map-table-row > * {
+        min-width: 0;
+        padding: clamp(1rem, 2.5vw, 1.6rem);
+        border-right: 1px solid rgba(var(--color-dark-rgb), 0.13);
+        border-bottom: 1px solid rgba(var(--color-dark-rgb), 0.13);
+    }
+
+    .map-table-row > :last-child {
+        border-right: 0;
+    }
+
+    .map-table-row:last-child > * {
+        border-bottom: 0;
+    }
+
+    .map-challenge-table .map-table-label,
+    .map-challenge-table .map-table-heading {
+        font-weight: 700;
+    }
+
+    .map-challenge-table ul {
+        margin: 0;
+        padding-left: 1.1rem;
+        line-height: 1.5;
+    }
+
+    .map-media {
+        margin: 0;
+    }
+
+    .map-overview-current-state > .map-media {
+        width: calc(100% - var(--case-study-content-inset));
+        max-width: 58ch;
+        margin-left: var(--case-study-content-inset);
+    }
+
+    .map-image-frame {
+        display: block;
+        overflow: hidden;
+        border-radius: 16px;
+        background: var(--color-media-stage);
+        box-shadow:
+            0 3px 8px rgba(var(--color-dark-rgb), 0.2),
+            0 12px 30px rgba(var(--color-dark-rgb), 0.14);
+    }
+
+    .map-media img {
+        display: block;
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+
+    .map-media.hero-art {
+        transform: translateY(-4.25rem);
+    }
+
+    .map-hero-copy {
+        transform: translateY(-4.25rem);
+    }
+
+    .map-media.hero-art .map-image-frame {
+        overflow: visible;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .map-media.hero-art img {
+        filter:
+            drop-shadow(0 3px 8px rgba(var(--color-dark-rgb), 0.2))
+            drop-shadow(0 12px 24px rgba(var(--color-dark-rgb), 0.14));
+    }
+
+    .map-media.contained .map-image-frame {
+        display: grid;
+        min-height: 100%;
+        padding: clamp(1rem, 3vw, 2rem);
+        place-items: center;
+    }
+
+    .map-media.contained img {
+        max-height: 720px;
+        object-fit: contain;
+    }
+
+    .map-media-frame {
+        display: grid;
+        min-height: 250px;
+        padding: clamp(1.5rem, 4vw, 3rem);
+        border: 1px dashed rgba(var(--color-dark-rgb), 0.34);
+        border-radius: 16px;
+        background:
+            radial-gradient(circle at 18% 18%, rgba(169, 204, 239, 0.55), transparent 38%),
+            radial-gradient(circle at 82% 78%, rgba(201, 184, 239, 0.55), transparent 40%),
+            var(--color-sidebar-background);
+        box-shadow:
+            0 3px 8px rgba(var(--color-dark-rgb), 0.3),
+            0 12px 30px rgba(var(--color-dark-rgb), 0.2);
+        place-items: center;
+        text-align: center;
+    }
+
+    .map-media-frame span,
+    .map-media-frame strong,
+    .map-media-frame small {
+        display: block;
+    }
+
+    .map-media-frame span {
+        margin-bottom: 0.45rem;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    .map-media-frame strong {
+        font-size: clamp(1.15rem, 2.5cqi, 1.6rem);
+    }
+
+    .map-media-frame small {
+        max-width: 40ch;
+        margin-top: 0.5rem;
+        line-height: 1.45;
+    }
+
+    .map-media figcaption {
+        margin-top: 0.85rem;
+        color: var(--color-muted);
+        font-size: 0.86rem;
+        line-height: 1.5;
+    }
+
+    .map-media.tall .map-media-frame {
+        min-height: 440px;
+    }
+
+    .map-media.wide .map-media-frame {
+        min-height: clamp(280px, 44cqi, 430px);
+    }
+
+    .map-process-grid .map-media {
+        min-width: 0;
+    }
+
+    .map-decision .map-media {
+        width: min(100%, 300px);
+        justify-self: center;
+    }
+
+    .map-process-step,
+    .map-decision {
+        display: grid;
+        grid-template-columns: minmax(0, 0.85fr) minmax(280px, 1.15fr);
+        gap: clamp(2rem, 6vw, 5rem);
+        align-items: center;
+    }
+
+    .map-process-list,
+    .map-decision-list {
+        display: grid;
+        gap: 0;
+    }
+
+    .map-process-list .map-process-step,
+    .map-decision-list .map-decision {
+        padding: clamp(2rem, 4.5vw, 4rem) 0;
+        border-top: 1px solid rgba(var(--color-dark-rgb), 0.16);
+    }
+
+    .map-process-list .map-process-step:first-child,
+    .map-decision-list .map-decision:first-child {
+        padding-top: 0;
+        border-top: 0;
+    }
+
+    .map-process-list .map-process-step:last-child,
+    .map-decision-list .map-decision:last-child {
+        padding-bottom: 0;
+    }
+
+    .map-section-disclosure {
+        margin-top: clamp(1.75rem, 4vw, 3rem);
+    }
+
+    .map-section-heading + .map-section-disclosure {
+        margin-top: 0;
+    }
+
+    .map-section-disclosure summary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.9rem 1.2rem;
+        border: 2px solid var(--color-dark);
+        border-radius: 999px;
+        color: var(--color-dark);
+        font-weight: 700;
+        cursor: pointer;
+        list-style: none;
+        transition: background-color 180ms ease, color 180ms ease;
+    }
+
+    .map-section-disclosure summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .map-section-disclosure summary:hover,
+    .map-section-disclosure summary:focus-visible {
+        background: var(--color-accent);
+        color: white;
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 4px;
+    }
+
+    .map-section-disclosure summary:focus-visible {
+        outline: 3px solid var(--color-dark);
+        outline-offset: 4px;
+    }
+
+    .map-section-disclosure .map-summary-open {
+        display: none;
+    }
+
+    .map-section-disclosure[open] .map-summary-closed {
+        display: none;
+    }
+
+    .map-section-disclosure[open] .map-summary-open {
+        display: inline;
+    }
+
+    .map-section-disclosure .map-summary-icon {
+        display: inline-block;
+        font-size: 1.15em;
+        line-height: 1;
+        transition: transform 180ms ease;
+    }
+
+    .map-section-disclosure[open] .map-summary-icon {
+        transform: rotate(180deg);
+    }
+
+    .map-section-disclosure .map-process-list,
+    .map-section-disclosure .map-decision-list {
+        margin-top: clamp(3rem, 7vw, 5rem);
+    }
+
+    .map-process-step:nth-child(even),
+    .map-decision:nth-child(even) {
+        grid-template-columns: minmax(280px, 1.15fr) minmax(0, 0.85fr);
+    }
+
+    .map-process-step:nth-child(even) .map-copy,
+    .map-decision:nth-child(even) .map-decision-copy {
+        order: 2;
+    }
+
+    .map-copy h3,
+    .map-decision-copy h3 {
+        font-size: clamp(1.4rem, 3cqi, 2rem);
+    }
+
+    .map-outcomes {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(1.5rem, 4vw, 3rem);
+    }
+
+    .map-outcomes > div {
+        padding-top: 1.4rem;
+        border-top: 4px solid var(--color-dark);
+    }
+
+    .map-outcomes h3 {
+        margin: 0;
+        font-size: 1.4rem;
+    }
+
+    .map-outcome-grid {
+        margin-top: clamp(3rem, 6vw, 5rem);
+    }
+
+    .map-outcome-grid > article:nth-child(3) {
+        grid-column: 1 / -1;
+    }
+
+    .map-quote {
+        margin: clamp(2rem, 5vw, 4rem) 0 0;
+        font-size: clamp(1.25rem, 3cqi, 1.8rem);
+        line-height: 1.45;
+    }
+
+    .map-impact-story {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(220px, 0.52fr);
+        gap: clamp(2.5rem, 7vw, 5.5rem);
+        align-items: center;
+    }
+
+    .map-impact-copy h3 {
+        max-width: 18ch;
+        margin: 0 0 1rem;
+        font-size: clamp(1.65rem, 3.5cqi, 2.5rem);
+        line-height: 1.12;
+        letter-spacing: -0.025em;
+    }
+
+    .map-impact-intro {
+        max-width: 54ch;
+        margin: 0;
+        font-size: 1.08rem;
+        line-height: 1.65;
+    }
+
+    .map-impact-list {
+        margin: clamp(2rem, 5vw, 3.5rem) 0 0;
+        border-top: 1px solid rgba(var(--color-dark-rgb), 0.2);
+    }
+
+    .map-impact-item {
+        display: grid;
+        grid-template-columns: 7rem minmax(0, 1fr);
+        gap: 1.25rem;
+        padding: 1.25rem 0;
+        border-bottom: 1px solid rgba(var(--color-dark-rgb), 0.2);
+    }
+
+    .map-impact-item dt {
+        color: var(--color-muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .map-impact-item dd {
+        margin: 0;
+        line-height: 1.55;
+    }
+
+    .map-impact-item dd strong {
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+
+    .map-impact-reflection {
+        margin: clamp(2rem, 4vw, 3rem) 0 0;
+        line-height: 1.65;
+    }
+
+    .map-result-media {
+        width: min(100%, 280px);
+        margin: 0;
+        justify-self: center;
+    }
+
+    .map-solution-media {
+        width: calc(100% - var(--case-study-content-inset));
+        max-width: 640px;
+        margin: 0 0 0 var(--case-study-content-inset);
+    }
+
+    .map-solution-comparison {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(1.25rem, 4vw, 3rem);
+        align-items: start;
+    }
+
+    .map-solution-comparison-item {
+        display: grid;
+        gap: 0.35rem;
+        margin: 0;
+    }
+
+    .map-solution-comparison-item figcaption {
+        margin: 0;
+        color: var(--color-dark);
+        font-family: var(--font-body);
+        font-size: var(--card-heading-size);
+        font-weight: 700;
+        line-height: var(--card-heading-line-height);
+        text-align: left;
+    }
+
+    .map-solution-comparison-item img {
+        display: block;
+        width: 100%;
+        height: auto;
+        filter: drop-shadow(0 8px 18px rgba(var(--color-dark-rgb), 0.16));
+    }
+
+    .map-outcome-media {
+        width: min(100%, 340px);
+    }
+
+    .map-animation-shell {
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+        background: var(--color-dark);
+        box-shadow:
+            0 3px 8px rgba(var(--color-dark-rgb), 0.2),
+            0 12px 30px rgba(var(--color-dark-rgb), 0.14);
+    }
+
+    .map-animation-shell img {
+        display: block;
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+
+    .map-animation-toggle {
+        position: absolute;
+        right: 0.75rem;
+        bottom: 0.75rem;
+        min-height: 44px;
+        padding: 0.65rem 0.9rem;
+        border: 2px solid white;
+        border-radius: 999px;
+        background: rgba(var(--color-dark-rgb), 0.9);
+        color: white;
+        font: inherit;
+        font-size: 0.82rem;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .map-animation-toggle:hover,
+    .map-animation-toggle:focus-visible {
+        background: var(--color-accent);
+        color: white;
+        box-shadow: 0 5px 14px rgba(var(--color-dark-rgb), 0.2);
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
+        transform: translateY(-2px);
+    }
+
+    .map-animation-toggle:focus-visible {
+        outline: 3px solid white;
+        outline-offset: 3px;
+    }
+
+    .map-result-media figcaption {
+        margin-top: 0.85rem;
+        color: var(--color-muted);
+        font-size: 0.86rem;
+        line-height: 1.5;
+    }
+
+    @container map-case-study (max-width: 720px) {
+        .map-hero,
+        .map-section-heading,
+        .map-solution-copy,
+        .map-process-step,
+        .map-process-step:nth-child(even),
+        .map-decision,
+        .map-decision:nth-child(even),
+        .map-impact-story {
+            grid-template-columns: 1fr;
+        }
+
+        .map-solution-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .map-approach-item {
+            grid-template-columns: 2rem minmax(0, 1fr);
+        }
+
+        .map-approach-response {
+            grid-column: 2;
+        }
+
+        .map-hero-copy {
+            order: -1;
+            transform: none;
+        }
+
+        .map-hero {
+            margin-bottom: 0;
+        }
+
+        .map-media.hero-art {
+            transform: none;
+        }
+
+        .map-process-step:nth-child(even) .map-copy,
+        .map-decision:nth-child(even) .map-decision-copy {
+            order: 0;
+        }
+
+        .map-card-grid.three {
+            grid-template-columns: 1fr;
+        }
+
+        .map-role {
+            width: 100%;
+            margin-left: 0;
+        }
+
+        .map-overview-subsection {
+            width: 100%;
+            margin-left: 0;
+        }
+
+        .map-overview-details {
+            width: 100%;
+            grid-template-columns: 1fr;
+            margin-left: 0;
+        }
+
+        .map-overview-current-state > .map-media {
+            width: 100%;
+            margin-left: 0;
+        }
+
+        .map-solution-media {
+            width: 100%;
+            max-width: 640px;
+            margin-left: 0;
+            justify-self: start;
+        }
+
+        .map-media.tall .map-media-frame {
+            min-height: 330px;
+        }
+    }
+
+    @container map-case-study (max-width: 520px) {
+        .map-card-grid,
+        .map-process-grid,
+        .map-outcomes,
+        .map-outcome-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .map-outcome-grid > article:nth-child(3) {
+            grid-column: auto;
+        }
+
+        .map-impact-item {
+            grid-template-columns: 1fr;
+            gap: 0.4rem;
+        }
+
+        .map-challenge-table {
+            grid-template-columns: 1fr;
+        }
+
+        .map-table-row > * {
+            border-right: 0;
+            border-bottom: 1px solid rgba(var(--color-dark-rgb), 0.13);
+        }
+
+        .map-table-row:last-child > :last-child {
+            border-bottom: 0;
+        }
+
+        .map-table-row:first-child .map-table-heading:first-child {
+            display: none;
+        }
+    }
+</style>
+
+<article class="map-case-study" data-case-study-version="2026-08-07-restored">
+    <header class="map-hero">
+        <figure class="map-media hero-art">
+            <div class="map-image-frame">
+                <img src="images/Map%20Overlays/Hero%20image-no-blobs.png" width="604" height="817" alt="Mobile map overlay drawer showing base maps, cell coverage, public lands, and a selected smoke overlay" decoding="async">
+            </div>
+        </figure>
+
+        <div class="map-hero-copy">
+            <p class="map-eyebrow">Campendium · 2023</p>
+            <h1>Map Overlay Redesign</h1>
+            <p class="map-lede">Helping RVers efficiently explore, compare, and navigate map overlays.</p>
+        </div>
+    </header>
+
+    <section class="map-section" aria-labelledby="map-overview">
+        <div class="map-section-heading">
+            <h2 id="map-overview">Overview</h2>
+            <p>A smoke-layer request exposed a fragmented map system. I proposed redesigning the architecture instead of adding another control.</p>
+        </div>
+
+        <div class="map-overview-details">
+            <section class="map-overview-detail" aria-labelledby="map-role-heading">
+                <h3 id="map-role-heading">My role</h3>
+                <p>Led design from concept through developer handoff.</p>
+            </section>
+
+            <section class="map-overview-detail" aria-labelledby="map-goals">
+                <h3 id="map-goals">Goals</h3>
+                <ul>
+                    <li>One familiar entry point</li>
+                    <li>Clear base-map and overlay behavior</li>
+                    <li>A scalable foundation for future layers</li>
+                </ul>
+            </section>
+        </div>
+
+        <section class="map-overview-current-state" aria-labelledby="map-current-state">
+            <div class="map-overview-current-state-copy map-overview-subsection">
+                <h3 id="map-current-state">Current state</h3>
+                <p>Base maps and overlays lived behind separate controls. RVers had to remember where each option was stored, and every new layer added more fragmentation.</p>
+            </div>
+
+            <figure class="map-media wide map-overview-subsection">
+                <div class="map-image-frame">
+                    <img src="images/Map%20Overlays/overview.png" width="982" height="720" alt="Current Campendium map architecture showing three separate controls leading to individual drawers for base maps and two overlay categories" loading="lazy" decoding="async">
+                </div>
+                <figcaption>Three entry points split related map tools across separate drawers.</figcaption>
+            </figure>
+        </section>
+    </section>
+
+    <section class="map-section" aria-labelledby="map-challenges">
+        <div class="map-section-heading">
+            <h2 id="map-challenges">Challenges and opportunities</h2>
+            <p>The system needed to reduce confusion and organize free and Pro tools.</p>
+        </div>
+
+        <div class="map-challenge-table" role="table" aria-label="Customer and business challenges and opportunities">
+            <div class="map-table-row" role="row">
+                <div class="map-table-heading" role="columnheader"><span class="visually-hidden">Audience</span></div>
+                <div class="map-table-heading" role="columnheader">Challenges</div>
+                <div class="map-table-heading" role="columnheader">Opportunities</div>
+            </div>
+
+            <div class="map-table-row" role="row">
+                <div class="map-table-label" role="rowheader">Customer</div>
+                <div role="cell">
+                    <ul>
+                        <li>The existing experience was disjointed</li>
+                        <li>Adding another control would create more clutter and confusion</li>
+                    </ul>
+                </div>
+                <div role="cell">
+                    <ul>
+                        <li>Consolidate every map layer into one view</li>
+                        <li>Make it easier to compare and combine overlays</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="map-table-row" role="row">
+                <div class="map-table-label" role="rowheader">Business</div>
+                <div role="cell">
+                    <ul>
+                        <li>There was no clear place for the new smoke layer</li>
+                        <li>The unclear design made feature upsells more difficult</li>
+                    </ul>
+                </div>
+                <div role="cell">
+                    <ul>
+                        <li>A more efficient selection experience could support Pro conversion</li>
+                        <li>A scalable system would make future additions easier</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-section" aria-labelledby="map-approach">
+        <div class="map-section-heading">
+            <h2 id="map-approach">Approach</h2>
+            <p>I used two principles to turn a smoke-layer request into a scalable map system.</p>
+        </div>
+
+        <div class="map-approach-framework">
+            <article class="map-approach-item">
+                <span class="map-approach-number">01</span>
+                <div class="map-approach-signal">
+                    <h3>Design the system, not one feature</h3>
+                    <p>A fourth control would deepen fragmentation—and future layers would repeat the problem.</p>
+                </div>
+                <div class="map-approach-response">
+                    <span class="map-step-label">Design response</span>
+                    <p>Consolidate every option in an architecture built for Pro access, dark mode, and future layers.</p>
+                </div>
+            </article>
+
+            <article class="map-approach-item">
+                <span class="map-approach-number">02</span>
+                <div class="map-approach-signal">
+                    <h3>Keep the familiar; clarify the rules</h3>
+                    <p>The drawer worked, but base maps and overlays behaved differently.</p>
+                </div>
+                <div class="map-approach-response">
+                    <span class="map-step-label">Design response</span>
+                    <p>Preserve the thumb-friendly drawer, then use grouping and selection states to make each behavior clear.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="map-section" aria-labelledby="map-process">
+        <div class="map-section-heading">
+            <h2 id="map-process">Process</h2>
+            <p>Research narrowed the problem; wireframes and UI iteration shaped the final system.</p>
+        </div>
+
+        <details class="case-study-disclosure map-section-disclosure">
+            <summary>
+                <span class="case-study-summary-closed map-summary-closed">View 7 process steps</span>
+                <span class="case-study-summary-open map-summary-open">Hide process steps</span>
+                <span class="case-study-summary-icon map-summary-icon" aria-hidden="true">⌄</span>
+            </summary>
+
+        <div class="map-process-list">
+            <article class="map-process-step">
+                <div class="map-copy">
+                    <span class="map-step-label">01 · Research the landscape</span>
+                    <h3>State-of-the-art research</h3>
+                    <p>I reviewed mapping apps to identify familiar patterns and opportunities.</p>
+                </div>
+                <figure class="map-media wide">
+                    <div class="map-image-frame">
+                        <img src="images/Map%20Overlays/state%20of%20the%20art%20research.png" width="3389" height="2985" alt="Research board comparing map and overlay patterns across outdoor, weather, and navigation products" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption>Comparative research surfaced six patterns worth testing.</figcaption>
+                </figure>
+            </article>
+
+            <article class="map-process-step">
+                <div class="map-copy">
+                    <span class="map-step-label">02 · Organize the system</span>
+                    <h3>Inventory and sorting</h3>
+                    <p>I grouped current and planned overlays into categories that could scale.</p>
+                </div>
+                <figure class="map-media wide">
+                    <div class="map-image-frame">
+                        <img src="images/Map%20Overlays/Inventory.png" width="3385" height="3295" alt="Inventory sorting base maps, cell coverage, land types, environmental layers, and weather into scalable categories" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption>The inventory separated base maps from optional overlays and identified Pro content.</figcaption>
+                </figure>
+            </article>
+
+            <article class="map-process-step">
+                <div class="map-copy">
+                    <span class="map-step-label">03 · Understand RVers</span>
+                    <h3>Interviews and user journey</h3>
+                    <p>Interviews with full-time RVers revealed when and why they compare map types.</p>
+                </div>
+                <figure class="map-media contained">
+                    <div class="map-image-frame">
+                        <img src="images/Map%20Overlays/user%20expert.png" width="1354" height="1809" alt="Annotated journey from an expert RVer interview highlighting difficulty reaching and changing map overlays" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption>The journey exposed a key usability issue: the drawer moved the control out of thumb reach.</figcaption>
+                </figure>
+            </article>
+
+            <article class="map-process-step">
+                <div class="map-copy">
+                    <span class="map-step-label">04 · Explore the interface</span>
+                    <h3>Wireframe familiar patterns</h3>
+                    <p>I translated the strongest research patterns into Campendium’s map experience.</p>
+                </div>
+                <figure class="map-media">
+                    <div class="map-image-frame">
+                        <img src="images/Map%20Overlays/Wireframes.png" width="2506" height="1579" alt="Six wireframe directions translating familiar competitor patterns into Campendium" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption>Six directions tested navigation, grouping, and selection patterns.</figcaption>
+                </figure>
+            </article>
+
+            <article class="map-process-step">
+                <div class="map-copy">
+                    <span class="map-step-label">05 · Refine the system</span>
+                    <h3>Iterate from structure to UI</h3>
+                    <p>I carried the strongest wireframe into higher fidelity, testing hierarchy, tile treatments, density, and selection feedback until the experience felt clear and cohesive.</p>
+                </div>
+                <figure class="map-media">
+                    <div class="map-image-frame">
+                        <img src="images/Map%20Overlays/Ui%20experimentation.png" width="3721" height="1265" alt="Six interface iterations exploring tile hierarchy, section spacing, selection outlines, radios, checkboxes, counts, and Clear All placement" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption>Each pass resolved a different layer of hierarchy and interaction feedback.</figcaption>
+                </figure>
+            </article>
+
+            <article class="map-process-step">
+                <div class="map-copy">
+                    <span class="map-step-label">06 · Prepare for development</span>
+                    <h3>Document the interaction flow</h3>
+                    <p>I mapped states, transitions, and edge cases so engineering could build the behavior—not just the screens.</p>
+                </div>
+                <figure class="map-media wide">
+                    <div class="map-image-frame">
+                        <img src="images/Map%20Overlays/interaction%20design.png" width="1747" height="1859" alt="Developer handoff flow connecting the blank map, open drawer, selected base map, selected smoke overlay, applied smoke layer, and open disclaimer states" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption>The handoff connected each screen to its trigger, state change, and resulting map behavior.</figcaption>
+                </figure>
+            </article>
+
+            <article class="map-process-step">
+                <div class="map-copy">
+                    <span class="map-step-label">07 · Hand off the system</span>
+                    <h3>Annotate final states</h3>
+                    <p>I packaged the final screens with specifications for light and dark modes, Pro access, locked states, and edge cases.</p>
+                </div>
+                <figure class="map-media wide">
+                    <div class="map-image-frame">
+                        <img src="images/Map%20Overlays/additional%20states.png" width="1881" height="1970" alt="Developer handoff screens documenting light and dark mode map drawers with selected base maps and locked Pro overlays" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption>The final handoff documented visual and access states engineering needed to build consistently.</figcaption>
+                </figure>
+            </article>
+        </div>
+        </details>
+    </section>
+
+    <section class="map-section" aria-labelledby="map-solution">
+        <div class="map-solution-layout">
+            <div class="map-solution-copy">
+                <h2 id="map-solution">Proposed solution</h2>
+                <p>One drawer organizes base maps and overlays across mobile and desktop.</p>
+            </div>
+
+            <div class="map-solution-media" role="group" aria-label="Map overlay before and after comparison">
+                <div class="map-solution-comparison">
+                    <figure class="map-solution-comparison-item">
+                        <figcaption>Before</figcaption>
+                        <img src="images/Map%20Overlays/Map_overlay_before.png" width="501" height="1052" alt="Map layers split across separate map controls before the redesign" loading="lazy" decoding="async">
+                    </figure>
+                    <figure class="map-solution-comparison-item">
+                        <figcaption>After</figcaption>
+                        <img src="images/Map%20Overlays/Map_Overlay_after.png" width="497" height="1052" alt="Base maps and overlays organized in one drawer after the redesign" loading="lazy" decoding="async">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-section" aria-labelledby="map-decisions">
+        <div class="map-section-heading">
+            <h2 id="map-decisions">Design decisions</h2>
+            <p>Familiar behavior, clearer grouping, and visible selection states shaped the final system.</p>
+        </div>
+
+        <details class="case-study-disclosure map-section-disclosure">
+            <summary>
+                <span class="case-study-summary-closed map-summary-closed">View 7 design decisions</span>
+                <span class="case-study-summary-open map-summary-open">Hide design decisions</span>
+                <span class="case-study-summary-icon map-summary-icon" aria-hidden="true">⌄</span>
+            </summary>
+
+        <div class="map-decision-list">
+            <article class="map-decision">
+                <div class="map-decision-copy">
+                    <span class="map-step-label">Drawer pattern</span>
+                    <h3>Keep behavior users already understand</h3>
+                    <p>The existing drawer already supported scrolling, varied screen heights, and thumb-friendly use.</p>
+                </div>
+                <figure class="map-media">
+                    <div class="map-image-frame">
+                        <img src="images/Map%20Overlays/Design%20Decision%20Screenshots/decision-drawer-pattern-clean.png" width="730" height="742" alt="Before and after comparison showing the short base-map drawer expanded into a full drawer for base maps and overlays" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption>Before: one short drawer. After: one scalable home for the full system.</figcaption>
+                </figure>
+            </article>
+
+            <article class="map-decision">
+                <div class="map-decision-copy">
+                    <span class="map-step-label">Tile pattern</span>
+                    <h3>Make options visual and easy to tap</h3>
+                    <p>Image-and-text tiles preview each overlay and provide large tap targets.</p>
+                </div>
+                <figure class="map-media">
+                    <div class="map-image-frame">
+                        <img src="images/Map%20Overlays/Design%20Decision%20Screenshots/Screenshot%202026-08-06%20at%2011.06.39%E2%80%AFAM.png" width="732" height="768" alt="Before and after comparison highlighting the familiar visual tile pattern reused for the new smoke overlay" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption>The same preview-and-label pattern now works across map types.</figcaption>
+                </figure>
+            </article>
+
+            <article class="map-decision">
+                <div class="map-decision-copy">
+                    <span class="map-step-label">Information architecture</span>
+                    <h3>Use categories to reduce cognitive load</h3>
+                    <p>Familiar categories make a growing collection easier to scan.</p>
+                </div>
+                <figure class="map-media">
+                    <div class="map-image-frame">
+                        <img src="images/Map%20Overlays/Design%20Decision%20Screenshots/decision-information-architecture-clean-v3.png" width="500" height="878" alt="Map overlay drawer highlighting categories for cell coverage, public lands, and environmental information" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption>Category labels create structure without adding another navigation level.</figcaption>
+                </figure>
+            </article>
+
+            <article class="map-decision">
+                <div class="map-decision-copy">
+                    <span class="map-step-label">Base maps</span>
+                    <h3>Make single selection unmistakable</h3>
+                    <p>Distinct selected and unselected states clarify the active base map.</p>
+                </div>
+                <figure class="map-media">
+                    <div class="map-image-frame">
+                        <img src="images/Map%20Overlays/Design%20Decision%20Screenshots/decision-base-maps-clean-v2.png" width="502" height="868" alt="Map drawer highlighting the base-map section and its selected default map" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption>Base maps stay visually separate because they replace one another.</figcaption>
+                </figure>
+            </article>
+
+            <article class="map-decision">
+                <div class="map-decision-copy">
+                    <span class="map-step-label">Overlays</span>
+                    <h3>Support multiple simultaneous selections</h3>
+                    <p>Checkboxes show that multiple overlays can be active at once.</p>
+                </div>
+                <figure class="map-media">
+                    <div class="map-image-frame">
+                        <img src="images/Map%20Overlays/Design%20Decision%20Screenshots/Screenshot%202026-08-06%20at%2011.06.56%E2%80%AFAM.png" width="454" height="860" alt="Map drawer highlighting the multi-select overlay section with smoke selected" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption>Unlike base maps, overlays can work together.</figcaption>
+                </figure>
+            </article>
+
+            <article class="map-decision">
+                <div class="map-decision-copy">
+                    <span class="map-step-label">Selection feedback</span>
+                    <h3>Keep the current state visible</h3>
+                    <p>A count pill keeps the number of active overlays visible.</p>
+                </div>
+                <figure class="map-media">
+                    <div class="map-image-frame">
+                        <img src="images/Map%20Overlays/Design%20Decision%20Screenshots/Screenshot%202026-08-06%20at%2011.07.01%E2%80%AFAM.png" width="412" height="836" alt="Map drawer highlighting a pill that says one overlay is selected" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption>The count stays visible even when the selected tile is below the fold.</figcaption>
+                </figure>
+            </article>
+
+            <article class="map-decision">
+                <div class="map-decision-copy">
+                    <span class="map-step-label">Bulk action</span>
+                    <h3>Reveal “Clear All” only when it is useful</h3>
+                    <p>The action appears only when users have something to clear.</p>
+                </div>
+                <figure class="map-media">
+                    <div class="map-image-frame">
+                        <img src="images/Map%20Overlays/Design%20Decision%20Screenshots/decision-clear-all-clean-v2.png" width="470" height="856" alt="Map drawer highlighting the Clear All action beside the overlay selection count" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption>One action removes every active overlay and returns the map to its base state.</figcaption>
+                </figure>
+            </article>
+        </div>
+        </details>
+    </section>
+
+    <section class="map-section" aria-labelledby="map-outcomes">
+        <div class="map-section-heading">
+            <h2 id="map-outcomes">Outcomes and impact</h2>
+            <p>The redesign launched as one unified system for Campendium’s map tools.</p>
+        </div>
+
+        <div class="map-impact-story">
+            <div class="map-impact-copy">
+                <span class="map-step-label">Launched outcome</span>
+                <h3>One control made maps easier to use—and easier to grow.</h3>
+                <p class="map-impact-intro">RVers could find and combine layers in one place. Campendium gained a scalable home for Pro features and future layers.</p>
+
+                <dl class="map-impact-list">
+                    <div class="map-impact-item">
+                        <dt>User</dt>
+                        <dd><strong>One place for every layer.</strong> Find, combine, review, and clear without switching controls.</dd>
+                    </div>
+                    <div class="map-impact-item">
+                        <dt>Business</dt>
+                        <dd><strong>Stronger adoption.</strong> The team reported higher engagement and Pro conversion; exact figures were not retained.</dd>
+                    </div>
+                    <div class="map-impact-item">
+                        <dt>Product</dt>
+                        <dd><strong>Built to expand.</strong> Future maps, overlays, and access states share one reusable framework.</dd>
+                    </div>
+                </dl>
+
+                <p class="map-impact-reflection"><strong>Leadership takeaway:</strong> Connecting interaction details to user clarity and product scale built support for one unified system.</p>
+            </div>
+
+            <figure class="map-result-media map-outcome-media">
+                <div class="map-animation-shell">
+                    <img
+                        src="images/Map%20Overlays/final%20gif.png"
+                        data-map-animation
+                        data-animated-src="images/Map%20Overlays/final-map-overlays.gif"
+                        data-static-src="images/Map%20Overlays/final%20gif.png"
+                        width="222"
+                        height="480"
+                        alt="Launched Campendium map with the consolidated layers control, map markers, filters, and campground details"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                    <button class="map-animation-toggle" type="button" data-map-animation-toggle>Pause animation</button>
+                </div>
+                <figcaption>The final experience keeps layers inside the primary browsing flow.</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <nav class="case-study-navigation" aria-label="More UX case studies">
+        <a class="case-study-navigation-link previous" href="#scheduling-product-creation" rel="prev">
+            <span class="case-study-navigation-direction"><span aria-hidden="true">←</span> Previous case study</span>
+            <strong>Scheduling Product</strong>
+        </a>
+        <a class="case-study-navigation-link next" href="#search-redesign" rel="next">
+            <span class="case-study-navigation-direction">Next case study <span aria-hidden="true">→</span></span>
+            <strong>Search Results Updates</strong>
+        </a>
+    </nav>
+</article>

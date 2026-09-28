@@ -1,0 +1,883 @@
+<style>
+    .home-page {
+        position: relative;
+        isolation: isolate;
+        width: 100%;
+        --home-edge: 48px;
+        --home-space: clamp(4.5rem, 8vw, 7.5rem);
+        container: home / inline-size;
+        font-family: var(--font-body);
+    }
+
+    .home-rainbow-squiggle {
+        --ribbon-shift-x: 0px;
+        --ribbon-shift-y: 0px;
+        --ribbon-scale-x: 1;
+        --ribbon-hue: 0deg;
+        --ribbon-glow: 0.2;
+        --ribbon-bloom-offset: 0;
+        position: absolute;
+        z-index: 0;
+        top: -6rem;
+        left: 0;
+        width: 100%;
+        height: calc(100% + 12rem);
+        margin: 0;
+        overflow: visible;
+        opacity: 0.42;
+        pointer-events: none;
+        filter: hue-rotate(var(--ribbon-hue));
+        will-change: filter;
+    }
+
+    .home-rainbow-squiggle path {
+        transform: translate(var(--ribbon-shift-x), var(--ribbon-shift-y)) scaleX(var(--ribbon-scale-x));
+        transform-box: fill-box;
+        transform-origin: center;
+        will-change: transform;
+    }
+
+    .home-rainbow-squiggle .squiggle-halo {
+        fill: none;
+        stroke: url(#home-pastel-spectrum);
+        stroke-linecap: round;
+        stroke-width: 110;
+        opacity: var(--ribbon-glow);
+        filter: url(#home-pastel-glow);
+    }
+
+    .home-rainbow-squiggle .squiggle-ribbon {
+        fill: none;
+        stroke: url(#home-pastel-spectrum);
+        stroke-linecap: round;
+        stroke-width: 58;
+        opacity: 0.32;
+        filter: url(#home-pastel-softness);
+    }
+
+    .home-rainbow-squiggle .squiggle-bloom {
+        fill: none;
+        stroke: url(#home-pastel-spectrum);
+        stroke-linecap: round;
+        stroke-width: 142;
+        stroke-dasharray: 17 9 22 13 14 25;
+        stroke-dashoffset: var(--ribbon-bloom-offset);
+        opacity: 0.23;
+        filter: url(#home-pastel-softness);
+        will-change: transform, stroke-dashoffset;
+    }
+
+    .home-page h1,
+    .home-page h2,
+    .home-page h3,
+    .home-page p {
+        color: var(--color-dark);
+    }
+
+    .home-page h1,
+    .home-page h2,
+    .home-page h3 {
+        text-wrap: balance;
+    }
+
+    .home-page h1,
+    .home-page h2 {
+        font-family: var(--font-display);
+        font-weight: 700;
+    }
+
+    .home-block {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        margin-left: 0;
+        padding: var(--home-space) 0;
+    }
+
+    .home-page p.home-eyebrow {
+        display: block;
+        margin: 0 0 0.9rem;
+        color: var(--color-muted) !important;
+        font-family: var(--font-body);
+        font-size: var(--type-eyebrow-size);
+        font-style: normal;
+        font-weight: var(--type-eyebrow-weight);
+        line-height: var(--type-eyebrow-line-height);
+        letter-spacing: var(--type-eyebrow-spacing);
+        text-transform: uppercase;
+    }
+
+    .home-hero {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: center;
+        gap: clamp(2.5rem, 6vw, 5.5rem);
+        padding-top: 0;
+        padding-bottom: clamp(3.5rem, 7vw, 6rem);
+    }
+
+    .home-portrait {
+        margin: 0;
+    }
+
+    .home-portrait img {
+        display: block;
+        width: 100%;
+        margin: 0;
+        aspect-ratio: 4 / 5;
+        object-fit: cover;
+        border-radius: 18px;
+        box-shadow: 0 3px 8px rgba(var(--color-dark-rgb), 0.25), 0 18px 42px rgba(var(--color-dark-rgb), 0.16);
+    }
+
+    .home-hero-copy {
+        max-width: 610px;
+    }
+
+    .home-hero h1 {
+        margin: 0 0 1.2rem;
+        font-size: var(--type-hero-size);
+        line-height: var(--type-hero-line-height);
+        letter-spacing: var(--type-hero-spacing);
+    }
+
+    .home-lede {
+        margin: 0 0 1.15rem;
+        font-size: var(--type-lede-size);
+        font-weight: 400;
+        line-height: var(--type-lede-line-height);
+    }
+
+    .home-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.85rem;
+        margin-top: 1.8rem;
+    }
+
+    .home-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        padding: 0.88rem 1.2rem;
+        border: 2px solid var(--color-dark);
+        border-radius: 999px;
+        background: transparent;
+        color: var(--color-dark);
+        font-weight: var(--type-eyebrow-weight);
+        line-height: 1.2;
+        text-decoration: none;
+        transition: background-color var(--transition-ui), border-color var(--transition-ui), color var(--transition-ui), transform var(--transition-ui), box-shadow var(--transition-ui);
+    }
+
+    .home-button.secondary {
+        background: transparent;
+        color: var(--color-dark);
+    }
+
+    .home-button:hover,
+    .home-button:focus-visible {
+        background: var(--color-accent);
+        border-color: var(--color-accent);
+        color: #fff;
+        box-shadow: 0 5px 14px rgba(var(--color-dark-rgb), 0.2);
+        transform: translateY(-2px);
+    }
+
+    .home-button svg {
+        width: 1.05rem;
+        height: 1.05rem;
+        flex: none;
+    }
+
+    .home-snapshot {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(1rem, 3vw, 1.75rem);
+        padding-top: 0;
+        padding-bottom: clamp(3.5rem, 7vw, 6rem);
+    }
+
+    .snapshot-card,
+    .practice-card {
+        padding: var(--card-padding);
+        border-radius: var(--card-radius);
+        background: var(--surface-card);
+        box-shadow: var(--shadow-card);
+    }
+
+    .snapshot-card {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 0.75rem;
+        min-width: 0;
+        padding: clamp(1.5rem, 2.5vw, 2rem);
+    }
+
+    .snapshot-card strong {
+        display: block;
+        margin: 0;
+        font-size: var(--card-heading-size);
+        line-height: 1.05;
+    }
+
+    .snapshot-card span {
+        display: block;
+        color: var(--color-muted);
+        line-height: var(--type-body-line-height);
+    }
+
+    .home-section-heading {
+        display: grid;
+        grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
+        gap: clamp(2rem, 6vw, 5rem);
+        align-items: end;
+        margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+
+    .home-section-heading h2,
+    .home-personal h2,
+    .contact-section h2 {
+        margin: 0;
+        font-size: var(--type-section-heading-size);
+        line-height: var(--type-section-heading-line-height);
+        letter-spacing: var(--type-section-heading-spacing);
+    }
+
+    .home-section-heading > p {
+        max-width: 58ch;
+        margin: 0;
+        font-size: var(--type-section-copy-size);
+        line-height: var(--type-section-copy-line-height);
+    }
+
+    .career-path {
+        padding-top: clamp(4rem, 7vw, 6.5rem);
+        border-top: 1px solid rgba(var(--color-dark-rgb), 0.16);
+    }
+
+    .career-list {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(1.25rem, 3vw, 3rem);
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .career-list::before {
+        content: "";
+        position: absolute;
+        top: 7px;
+        right: 16.67%;
+        left: 16.67%;
+        height: 1px;
+        background: rgba(var(--color-dark-rgb), 0.32);
+    }
+
+    .career-list li {
+        position: relative;
+        padding: 3.25rem 0.5rem 0;
+        text-align: center;
+    }
+
+    .career-list li::before {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 50%;
+        width: 15px;
+        height: 15px;
+        border: 4px solid var(--color-background);
+        border-radius: 50%;
+        background: var(--color-dark);
+        box-shadow: 0 0 0 1px rgba(var(--color-dark-rgb), 0.2);
+        transform: translateX(-50%);
+    }
+
+    .career-list li::after {
+        content: "";
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        width: 1px;
+        height: 24px;
+        background: rgba(var(--color-dark-rgb), 0.32);
+    }
+
+    .career-number {
+        display: block;
+        margin-bottom: 1.6rem;
+        color: var(--color-muted);
+        font-size: var(--type-eyebrow-size);
+        font-weight: var(--type-eyebrow-weight);
+        letter-spacing: var(--type-eyebrow-spacing);
+    }
+
+    .career-list h3 {
+        margin: 0 0 0.6rem;
+        font-size: var(--card-heading-size);
+        line-height: var(--card-heading-line-height);
+    }
+
+    .career-list p {
+        margin: 0;
+        line-height: var(--type-body-line-height);
+    }
+
+    .career-link {
+        display: inline-flex;
+        gap: 0.4rem;
+        align-items: center;
+        margin-top: 1.15rem;
+        color: var(--color-text);
+        font-size: 0.95rem;
+        font-weight: 650;
+        line-height: 1.3;
+        text-decoration-color: var(--color-accent);
+        text-decoration-thickness: 0.12em;
+        text-underline-offset: 0.22em;
+    }
+
+    .career-link span {
+        color: var(--color-accent);
+        transition: transform var(--transition-ui);
+    }
+
+    .career-link:hover,
+    .career-link:focus-visible {
+        text-decoration-thickness: 0.18em;
+    }
+
+    .career-link:hover span,
+    .career-link:focus-visible span {
+        transform: translateX(0.2rem);
+    }
+
+    .career-link:focus-visible {
+        border-radius: var(--radius-sm);
+        outline: 3px solid var(--color-accent);
+        outline-offset: 5px;
+    }
+
+    .home-practice {
+        padding-top: clamp(4rem, 7vw, 6.5rem);
+        border-top: 1px solid rgba(var(--color-dark-rgb), 0.16);
+    }
+
+    .practice-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(1rem, 3vw, 1.75rem);
+    }
+
+    .practice-card {
+        min-height: 180px;
+        text-align: left;
+    }
+
+    .practice-card .practice-number {
+        display: block;
+        margin-bottom: 1rem;
+        color: var(--color-muted);
+        font-size: var(--type-eyebrow-size);
+        font-weight: var(--type-eyebrow-weight);
+        letter-spacing: var(--type-eyebrow-spacing);
+    }
+
+    .practice-card h3 {
+        margin: 0 0 0.65rem;
+        font-size: var(--type-card-heading-size);
+    }
+
+    .practice-card p {
+        margin: 0;
+        line-height: var(--type-body-line-height);
+    }
+
+    .home-personal {
+        padding-top: clamp(3rem, 5vw, 4.5rem);
+        padding-bottom: clamp(3rem, 5vw, 4.5rem);
+        border-top: 1px solid rgba(var(--color-dark-rgb), 0.16);
+    }
+
+    .home-personal-intro {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: clamp(2rem, 5vw, 4rem);
+        align-items: start;
+    }
+
+    .home-personal h2 {
+        margin-bottom: 1.1rem;
+    }
+
+    .home-personal-copy p {
+        margin: 0 0 1rem;
+        font-size: var(--text-base);
+        line-height: 1.55;
+    }
+
+    .home-personal-copy p:last-of-type {
+        margin-bottom: 1.75rem;
+    }
+
+    .home-personal-gallery {
+        display: grid;
+        width: 100%;
+        max-width: none;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: clamp(0.55rem, 1vw, 0.8rem);
+        align-items: stretch;
+        margin: clamp(1.5rem, 3vw, 2.25rem) auto 0;
+    }
+
+    .home-personal-photo {
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        aspect-ratio: 5 / 4;
+        border: 0;
+        border-radius: var(--card-radius);
+        background: var(--surface-card);
+        box-shadow: var(--shadow-card);
+        cursor: pointer;
+    }
+
+    .home-personal-photo:focus-visible {
+        outline: 3px solid var(--color-accent);
+        outline-offset: 4px;
+    }
+
+    .home-personal-photo img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        margin: 0;
+        object-fit: cover;
+    }
+
+    .home-personal-photo-skiing img,
+    .home-personal-photo-olive img {
+        transform: scale(1.06);
+    }
+
+    .home-personal-photo-house img {
+        object-position: center 18%;
+    }
+
+    .interest-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .interest-list li {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.3rem 0.55rem;
+        border: 1px solid rgba(var(--color-dark-rgb), 0.2);
+        border-radius: 999px;
+        background: var(--surface-card);
+        font-size: 0.82rem;
+        font-weight: 600;
+    }
+
+    .contact-section {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+        gap: clamp(2.5rem, 7vw, 6rem);
+        align-items: end;
+        padding-top: clamp(4rem, 7vw, 6.5rem);
+        padding-bottom: clamp(3.5rem, 6vw, 5rem);
+        border-top: 1px solid rgba(var(--color-dark-rgb), 0.16);
+    }
+
+    .contact-section h2 {
+        max-width: 12ch;
+        margin-bottom: 1rem;
+    }
+
+    .contact-section p {
+        max-width: 58ch;
+        margin: 0;
+        font-size: var(--type-section-copy-size);
+        line-height: var(--type-section-copy-line-height);
+    }
+
+    .contact-links {
+        position: relative;
+        display: grid;
+        gap: 0.75rem;
+    }
+
+    .contact-link {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-top: 0;
+        border-right: 0;
+        border-bottom: 1px solid rgba(var(--color-dark-rgb), 0.32);
+        border-left: 0;
+        background: transparent;
+        color: var(--color-dark);
+        font: inherit;
+        font-size: var(--type-section-copy-size);
+        font-weight: var(--type-eyebrow-weight);
+        text-align: left;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .contact-link:first-child {
+        border-top: 1px solid rgba(var(--color-dark-rgb), 0.32);
+    }
+
+    .contact-link:hover,
+    .contact-link:focus-visible {
+        color: var(--color-accent);
+        text-decoration-line: underline;
+        text-decoration-color: var(--color-accent);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
+    }
+
+    .contact-link > span:last-child {
+        font-size: 1.35rem;
+    }
+
+    .contact-link > .contact-link-action {
+        color: var(--color-muted);
+        font-size: var(--type-eyebrow-size);
+        letter-spacing: var(--type-eyebrow-spacing);
+        text-transform: uppercase;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .home-rainbow-squiggle {
+            filter: none;
+            will-change: auto;
+        }
+
+        .home-rainbow-squiggle path {
+            transform: none;
+            will-change: auto;
+        }
+    }
+
+    @container home (max-width: 760px) {
+        .home-rainbow-squiggle {
+            top: -4rem;
+            left: 0;
+            width: 100%;
+            height: calc(100% + 8rem);
+            opacity: 0.4;
+        }
+
+        .home-block {
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+        .home-hero,
+        .home-section-heading,
+        .home-personal-intro,
+        .contact-section {
+            grid-template-columns: 1fr;
+        }
+
+        .home-personal-gallery {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-rows: none;
+        }
+
+        .home-personal-photo,
+        .home-personal-photo-travel,
+        .home-personal-photo-house,
+        .home-personal-photo-rollerblading,
+        .home-personal-photo-skiing,
+        .home-personal-photo-olive {
+            grid-column: auto;
+            grid-row: auto;
+        }
+
+        .home-personal-intro {
+            gap: 1.5rem;
+        }
+
+        .home-personal-photo {
+            aspect-ratio: 1;
+        }
+
+        .home-portrait {
+            width: min(82%, 320px);
+            max-width: 320px;
+            justify-self: center;
+        }
+
+        .home-hero-copy {
+            order: -1;
+        }
+
+        .home-snapshot,
+        .practice-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .career-list {
+            grid-template-columns: 1fr;
+            gap: 2.25rem;
+        }
+
+        .career-list::before {
+            top: 7px;
+            right: auto;
+            bottom: 0;
+            left: 7px;
+            width: 1px;
+            height: auto;
+        }
+
+        .career-list li {
+            padding: 0 0 0 3rem;
+            text-align: left;
+        }
+
+        .career-list li::before {
+            left: 0;
+            transform: none;
+        }
+
+        .career-list li::after {
+            top: 7px;
+            left: 15px;
+            width: 24px;
+            height: 1px;
+        }
+
+        .snapshot-card,
+        .practice-card {
+            min-height: 0;
+        }
+
+    }
+</style>
+
+<div class="home-page">
+    <svg class="home-rainbow-squiggle" viewBox="0 0 1200 3000" preserveAspectRatio="none" role="presentation" aria-hidden="true" focusable="false">
+        <defs>
+            <linearGradient id="home-pastel-spectrum" x1="0%" y1="0%" x2="0%" y2="22%" spreadMethod="repeat">
+                <stop offset="0%" stop-color="var(--color-rainbow-pink)"></stop>
+                <stop offset="17%" stop-color="var(--color-rainbow-peach)"></stop>
+                <stop offset="34%" stop-color="var(--color-rainbow-yellow)"></stop>
+                <stop offset="51%" stop-color="var(--color-rainbow-mint)"></stop>
+                <stop offset="68%" stop-color="var(--color-rainbow-blue)"></stop>
+                <stop offset="85%" stop-color="var(--color-rainbow-lavender)"></stop>
+                <stop offset="100%" stop-color="var(--color-rainbow-pink)"></stop>
+            </linearGradient>
+            <filter id="home-pastel-glow" x="-30%" y="-5%" width="160%" height="110%" color-interpolation-filters="sRGB">
+                <feGaussianBlur stdDeviation="34"></feGaussianBlur>
+            </filter>
+            <filter id="home-pastel-softness" x="-30%" y="-5%" width="160%" height="110%" color-interpolation-filters="sRGB">
+                <feGaussianBlur stdDeviation="18"></feGaussianBlur>
+            </filter>
+        </defs>
+        <path class="squiggle-halo" d="M 980 -180 C 1135 5, 1090 175, 930 285 C 790 380, 325 355, 245 535 C 145 755, 700 710, 880 860 C 1085 1030, 970 1205, 680 1265 C 385 1320, 115 1430, 235 1635 C 360 1845, 1020 1705, 1070 1945 C 1115 2170, 725 2240, 565 2345 C 365 2480, 120 2620, 260 2810 C 405 3005, 920 2865, 730 3180"></path>
+        <path class="squiggle-bloom" pathLength="100" d="M 980 -180 C 1135 5, 1090 175, 930 285 C 790 380, 325 355, 245 535 C 145 755, 700 710, 880 860 C 1085 1030, 970 1205, 680 1265 C 385 1320, 115 1430, 235 1635 C 360 1845, 1020 1705, 1070 1945 C 1115 2170, 725 2240, 565 2345 C 365 2480, 120 2620, 260 2810 C 405 3005, 920 2865, 730 3180"></path>
+        <path class="squiggle-ribbon" d="M 980 -180 C 1135 5, 1090 175, 930 285 C 790 380, 325 355, 245 535 C 145 755, 700 710, 880 860 C 1085 1030, 970 1205, 680 1265 C 385 1320, 115 1430, 235 1635 C 360 1845, 1020 1705, 1070 1945 C 1115 2170, 725 2240, 565 2345 C 365 2480, 120 2620, 260 2810 C 405 3005, 920 2865, 730 3180"></path>
+    </svg>
+
+    <section class="home-block home-hero" aria-labelledby="home-title">
+        <figure class="home-portrait">
+            <img src="images/Hoeper-Picture.jpg?v=2" alt="Portrait of Syd Hoeper" loading="eager" decoding="async">
+        </figure>
+
+        <div class="home-hero-copy">
+            <p class="home-eyebrow">Senior Product Designer</p>
+            <h1 id="home-title">Turning ambiguity into intuitive experiences.</h1>
+            <p class="home-lede">I untangle complex systems into clear paths that work for real people.</p>
+            <div class="home-actions">
+                <a class="home-button ui-action" href="documents/syd-hoeper-resume.pdf?v=3" target="_blank" rel="noopener noreferrer">
+                    View my resume <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="home-block home-snapshot" aria-label="Experience at a glance">
+        <div class="snapshot-card">
+            <strong>9 years experience</strong>
+            <span>Designing software from research through delivery.</span>
+        </div>
+        <div class="snapshot-card">
+            <strong>0→1 products</strong>
+            <span>Giving early ideas structure, direction, and momentum.</span>
+        </div>
+        <div class="snapshot-card">
+            <strong>Systems thinking</strong>
+            <span>Connecting small details to the bigger direction.</span>
+        </div>
+    </section>
+
+    <section class="home-block career-path" aria-labelledby="background-title">
+        <div class="home-section-heading">
+            <div>
+                <p class="home-eyebrow">Background</p>
+                <h2 id="background-title">A practice that keeps expanding.</h2>
+            </div>
+            <p>I started in physical product design, built my career leading digital products, and now use interactive media to deepen that core practice.</p>
+        </div>
+
+        <ul class="career-list">
+            <li>
+                <span class="career-number">2016 · Foundation</span>
+                <h3>Started with physical products</h3>
+                <p>Industrial design taught me to balance user needs with materials, form, and manufacturing.</p>
+                <a class="career-link" href="#booking-platform">View Campground Booking <span aria-hidden="true">→</span></a>
+            </li>
+            <li>
+                <span class="career-number">2018–Present · Core Practice</span>
+                <h3>Lead digital products end to end</h3>
+                <p>I lead research, strategy, design, and delivery across 0→1 products and evolving systems.</p>
+                <a class="career-link" href="#va-pdfs">View PDF Digitization <span aria-hidden="true">→</span></a>
+            </li>
+            <li>
+                <span class="career-number">2025–Present · Expanding</span>
+                <h3>Add new forms of interaction</h3>
+                <p>My MFA is adding Unity, spatial design, and play to the product thinking I bring to professional work.</p>
+                <a class="career-link" href="#scheduling-product-creation">View Scheduling Product <span aria-hidden="true">→</span></a>
+            </li>
+        </ul>
+    </section>
+
+    <section class="home-block home-practice" aria-labelledby="practice-title">
+        <div class="home-section-heading">
+            <div>
+                <p class="home-eyebrow">How I lead</p>
+                <h2 id="practice-title">From idea to launch.</h2>
+            </div>
+            <p>
+                Across digital products and interactive work, I bring structure to ambiguity, align the people involved, and lead the details from first brief through launch.
+            </p>
+        </div>
+
+        <div class="practice-grid">
+            <article class="practice-card">
+                <span class="practice-number">01</span>
+                <h3>Frame the opportunity</h3>
+                <p>Turn a loose brief into a clear direction grounded in people, goals, and technical reality.</p>
+            </article>
+            <article class="practice-card">
+                <span class="practice-number">02</span>
+                <h3>Make the vision buildable</h3>
+                <p>Define the flows, systems, prototypes, and production plan the team can execute.</p>
+            </article>
+            <article class="practice-card">
+                <span class="practice-number">03</span>
+                <h3>Lead it through launch</h3>
+                <p>Align collaborators, resolve details, and protect the whole experience through QA and delivery.</p>
+            </article>
+        </div>
+
+    </section>
+
+    <section class="home-block home-personal" aria-labelledby="personal-title" data-gallery-page>
+        <div class="home-personal-intro">
+            <div>
+                <p class="home-eyebrow">Beyond the work</p>
+                <h2 id="personal-title">A little about me.</h2>
+            </div>
+
+            <div class="home-personal-copy">
+                <p>
+                    I’m a proud trans/nonbinary designer (they/them) living in a little log cabin in Missoula, MT with my black cat, Olive.
+                </p>
+                <p>
+                    I’m happiest outside with my partner, Carly—skiing, rollerblading, or traveling in my Scamp trailer.
+                </p>
+
+                <ul class="interest-list" aria-label="Interests">
+                    <li><span aria-hidden="true">⛷️</span> Skiing</li>
+                    <li><span aria-hidden="true">🎨</span> Painting</li>
+                    <li><span aria-hidden="true">🪟</span> Stained glass</li>
+                    <li><span aria-hidden="true">🕹️</span> Game design</li>
+                    <li><span aria-hidden="true">⛺</span> Camping</li>
+                    <li><span aria-hidden="true">🌱</span> Gardening</li>
+                    <li><span aria-hidden="true">✈️</span> Traveling</li>
+                    <li><span aria-hidden="true">🛼</span> Rollerblading</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="home-personal-gallery" aria-label="Life beyond design" data-gallery>
+            <button class="home-personal-photo home-personal-photo-tile home-personal-photo-travel" type="button" data-gallery-item>
+                <img src="images/syd-and-carly-traveling.jpeg" width="5712" height="4284" alt="Syd and their partner, Carly, smiling together in front of a waterfall while traveling" loading="lazy" decoding="async">
+            </button>
+
+            <button class="home-personal-photo home-personal-photo-tile home-personal-photo-olive" type="button" data-gallery-item>
+                <img src="images/olive.png" width="2113" height="1511" alt="Olive, Syd’s black cat, lying down with wide curious eyes" loading="lazy" decoding="async">
+            </button>
+
+            <button class="home-personal-photo home-personal-photo-house" type="button" data-gallery-item>
+                <img src="images/syd-house.png" width="1268" height="1643" alt="Syd smiling in front of their log cabin in Missoula" loading="lazy" decoding="async">
+            </button>
+
+            <button class="home-personal-photo home-personal-photo-tile home-personal-photo-skiing" type="button" data-gallery-item>
+                <img src="images/syd-skiing.png" width="2147" height="1615" alt="Syd posing on skis above a snowy Montana valley" loading="lazy" decoding="async">
+            </button>
+
+            <button class="home-personal-photo home-personal-photo-tile home-personal-photo-rollerblading" type="button" data-gallery-item>
+                <img src="images/syd-and-carly-rollerblading.jpeg" width="4896" height="3672" alt="Syd and Carly smiling in helmets while rollerblading together at sunset" loading="lazy" decoding="async">
+            </button>
+        </div>
+
+        <dialog class="gallery-lightbox" data-gallery-dialog aria-label="Life beyond design photo viewer">
+            <button class="gallery-lightbox-close" type="button" data-gallery-close aria-label="Close full-screen image">&times;</button>
+            <button class="gallery-lightbox-nav" type="button" data-gallery-previous aria-label="Previous image">&#8592;</button>
+            <figure>
+                <img data-gallery-image alt="">
+                <figcaption data-gallery-counter aria-live="polite"></figcaption>
+            </figure>
+            <button class="gallery-lightbox-nav" type="button" data-gallery-next aria-label="Next image">&#8594;</button>
+        </dialog>
+    </section>
+
+    <section class="home-block contact-section" aria-labelledby="contact-title">
+        <div>
+            <p class="home-eyebrow">Contact</p>
+            <h2 id="contact-title">Let’s make something cool.</h2>
+            <p>
+                Have a role, project, or strange little idea? I’d love to hear about it.
+            </p>
+        </div>
+
+        <nav class="contact-links" aria-label="Contact options">
+            <a class="contact-link" href="documents/syd-hoeper-resume.pdf?v=3" target="_blank" rel="noopener noreferrer">
+                <span>View my résumé <span class="visually-hidden">(opens in a new tab)</span></span>
+                <span aria-hidden="true">↗</span>
+            </a>
+            <a class="contact-link" href="https://www.linkedin.com/in/sphoeper/" target="_blank" rel="noopener noreferrer">
+                <span>Connect on LinkedIn <span class="visually-hidden">(opens in a new tab)</span></span>
+                <span aria-hidden="true">↗</span>
+            </a>
+            <button class="contact-link" type="button" data-copy-email="sydhoeper@gmail.com">
+                <span>Email me</span>
+                <span aria-hidden="true">↗</span>
+            </button>
+        </nav>
+    </section>
+</div>
