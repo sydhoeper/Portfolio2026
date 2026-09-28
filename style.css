@@ -1656,14 +1656,14 @@ body:has(.gallery-lightbox[open]) {
 
 .featured-case-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(1rem, 2.5vw, 1.75rem);
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.25rem);
 }
 
 .featured-case-card {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
     min-width: 0;
-    flex-direction: column;
     overflow: hidden;
     border: 1px solid rgba(var(--color-dark-rgb), 0.12);
     border-radius: var(--radius-lg);
@@ -1672,6 +1672,15 @@ body:has(.gallery-lightbox[open]) {
     box-shadow: var(--shadow-card);
     text-decoration: none;
     transition: transform var(--transition-ui), box-shadow var(--transition-ui), border-color var(--transition-ui);
+}
+
+.featured-case-card:nth-child(even) .featured-case-metric,
+.featured-case-card:nth-child(even) > img {
+    order: 2;
+}
+
+.featured-case-card:nth-child(even) .featured-case-copy {
+    order: 1;
 }
 
 .featured-case-card:hover,
@@ -1687,7 +1696,8 @@ body:has(.gallery-lightbox[open]) {
 .featured-case-metric {
     display: block;
     width: 100%;
-    height: clamp(190px, 22vw, 260px);
+    height: 100%;
+    min-height: 320px;
 }
 
 .featured-case-card > img {
@@ -1723,7 +1733,8 @@ body:has(.gallery-lightbox[open]) {
     flex: 1;
     flex-direction: column;
     align-items: flex-start;
-    padding: clamp(1.3rem, 2.8vw, 1.8rem);
+    justify-content: center;
+    padding: clamp(1.75rem, 4vw, 3rem);
 }
 
 .featured-case-copy > span {
@@ -1738,7 +1749,7 @@ body:has(.gallery-lightbox[open]) {
 .featured-case-copy h3 {
     margin: 0 0 0.8rem;
     font-family: var(--font-display);
-    font-size: clamp(1.45rem, 2.7vw, 2rem);
+    font-size: clamp(1.55rem, 3vw, 2.35rem);
     line-height: 1.08;
     letter-spacing: -0.025em;
 }
@@ -1756,26 +1767,16 @@ body:has(.gallery-lightbox[open]) {
     text-underline-offset: 4px;
 }
 
-@media screen and (max-width: 1000px) {
-    .featured-case-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .featured-case-card {
-        display: grid;
-        grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
-    }
-
-    .featured-case-card > img,
-    .featured-case-metric {
-        height: 100%;
-        min-height: 260px;
-    }
-}
-
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 760px) {
     .featured-case-card {
         display: flex;
+        flex-direction: column;
+    }
+
+    .featured-case-card:nth-child(even) .featured-case-metric,
+    .featured-case-card:nth-child(even) > img,
+    .featured-case-card:nth-child(even) .featured-case-copy {
+        order: initial;
     }
 
     .featured-case-card > img,
@@ -1788,16 +1789,14 @@ body:has(.gallery-lightbox[open]) {
 /* Sarah Doody-inspired portfolio story architecture */
 .case-study-brief {
     margin: clamp(3rem, 7vw, 5.5rem) 0;
-    padding: clamp(1.5rem, 4vw, 2.5rem);
-    border: 1px solid rgba(var(--color-dark-rgb), 0.14);
-    border-radius: var(--radius-lg);
-    background: rgba(255, 254, 251, 0.86);
-    box-shadow: var(--shadow-card);
+    padding: clamp(3rem, 6vw, 5rem) 0;
+    border-top: 1px solid rgba(var(--color-dark-rgb), 0.16);
+    border-bottom: 1px solid rgba(var(--color-dark-rgb), 0.16);
 }
 
 .case-study-brief-header {
     display: grid;
-    grid-template-columns: minmax(180px, 0.7fr) minmax(0, 1.3fr);
+    grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1.15fr);
     align-items: end;
     gap: clamp(1.5rem, 5vw, 4rem);
     margin-bottom: 1.75rem;
@@ -1816,7 +1815,7 @@ body:has(.gallery-lightbox[open]) {
 .case-study-brief-header h2 {
     margin: 0.45rem 0 0;
     font-family: var(--font-display);
-    font-size: clamp(2rem, 4.2cqi, 3rem);
+    font-size: clamp(1.9rem, 3.8cqi, 2.7rem);
     line-height: 1.03;
     letter-spacing: -0.035em;
 }
@@ -1832,18 +1831,17 @@ body:has(.gallery-lightbox[open]) {
 .case-study-brief-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1px;
-    overflow: hidden;
+    gap: clamp(0.8rem, 2vw, 1.15rem);
     margin: 0;
-    border: 1px solid rgba(var(--color-dark-rgb), 0.12);
-    border-radius: var(--radius-md);
-    background: rgba(var(--color-dark-rgb), 0.12);
 }
 
 .case-study-brief-card {
     min-width: 0;
     padding: clamp(1.15rem, 2.5vw, 1.65rem);
-    background: var(--color-sidebar-background);
+    border: 1px solid rgba(var(--color-dark-rgb), 0.1);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+    box-shadow: var(--shadow-card);
 }
 
 .case-study-brief-card dt {
