@@ -1895,12 +1895,12 @@ body::before {
 }
 
 .top-navigation .navigation-header {
-    display: flex;
-    min-height: 58px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    min-height: 60px;
     align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 6px 9px 6px 22px;
+    column-gap: 1.5rem;
+    padding: 7px 8px 7px 20px;
     border: 1px solid rgba(var(--color-dark-rgb), 0.12);
     border-radius: var(--radius-pill);
     background: rgba(255, 254, 251, 0.92);
@@ -1912,7 +1912,7 @@ body::before {
     position: relative;
     display: inline-flex;
     width: auto;
-    height: 44px;
+    height: 40px;
     flex: 0 0 auto;
     align-items: center;
     justify-content: center;
@@ -1934,14 +1934,20 @@ body::before {
 
 .top-navigation .navigation-actions {
     display: flex;
+    height: 40px;
     align-items: center;
-    gap: 0.2rem;
+    justify-content: flex-end;
+    gap: 0.25rem;
 }
 
 .top-navigation .nav-action,
 .top-navigation .navigation .nav-action {
+    display: inline-flex;
     width: auto;
-    min-height: 44px;
+    height: 40px;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
     margin: 0;
     padding: 0.65rem 0.85rem;
     border: 0;
@@ -1950,7 +1956,7 @@ body::before {
     color: var(--color-dark);
     font-size: 0.92rem;
     font-weight: 650;
-    line-height: 1;
+    line-height: 1.1;
     text-decoration: none;
     white-space: nowrap;
     cursor: pointer;
@@ -2015,13 +2021,18 @@ body::before {
 
 .top-navigation .site-title,
 .top-navigation .navigation .site-title {
+    display: inline-flex;
     width: auto;
+    height: 40px;
+    align-items: center;
+    justify-self: start;
     margin: 0;
     padding: 0;
 }
 
 .top-navigation .site-title-name {
     font-size: 26px;
+    line-height: 1;
 }
 
 .top-navigation .navigation-menu {
@@ -2139,13 +2150,14 @@ body.mobile-navigation-open {
     }
 
     .top-navigation .navigation-header {
-        min-height: 56px;
-        padding: 6px 8px 6px 18px;
+        min-height: 58px;
+        column-gap: 0.75rem;
+        padding: 7px 8px 7px 18px;
     }
 
     .top-navigation .mobile-nav-toggle {
         width: auto;
-        height: 44px;
+        height: 40px;
     }
 
     .top-navigation .navigation-menu {
@@ -2163,7 +2175,7 @@ body.mobile-navigation-open {
     }
 
     .top-navigation .navigation-header {
-        gap: 0.3rem;
+        column-gap: 0.3rem;
         padding-left: 14px;
     }
 
@@ -2182,4 +2194,8 @@ body.mobile-navigation-open {
         padding-right: 0.7rem;
         padding-left: 0.7rem;
     }
+}
+
+#about {
+    scroll-margin-top: 105px;
 }
