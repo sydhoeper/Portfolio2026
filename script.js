@@ -11,7 +11,7 @@ let toastTimer = null;
 
 const pageMap = {
     home: "pages/home.html",
-    about: "pages/home.html",
+    about: "pages/about.html",
     "va-pdfs": "pages/User Experience Design/va-pdfs.html",
     "booking-platform": "pages/User Experience Design/booking-platform.html",
     "map-redesign": "pages/User Experience Design/map-redesign.html",
@@ -230,12 +230,6 @@ function finishPageLoad(pageName, focusContent) {
     updateActiveLink(pageName);
     document.title = "Syd Hoeper";
     window.scrollTo(0, 0);
-
-    if (pageName === "about") {
-        requestAnimationFrame(() => {
-            contentArea.querySelector("#about")?.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-    }
 
     if (focusContent) {
         const focusTarget = pageHeading || contentArea;

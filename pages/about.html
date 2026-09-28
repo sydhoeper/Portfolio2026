@@ -1,0 +1,357 @@
+<style>
+    .about-page {
+        width: 100%;
+        color: var(--color-dark);
+        container: about / inline-size;
+    }
+
+    .about-page h1,
+    .about-page h2,
+    .about-page h3,
+    .about-page p {
+        color: var(--color-dark);
+    }
+
+    .about-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+        align-items: center;
+        gap: clamp(2.5rem, 7vw, 6rem);
+        min-height: 560px;
+        padding: clamp(2rem, 4vw, 4rem) 0 clamp(4rem, 8vw, 7rem);
+    }
+
+    .about-eyebrow {
+        margin: 0 0 0.9rem;
+        color: var(--color-muted) !important;
+        font-size: var(--type-eyebrow-size);
+        font-weight: var(--type-eyebrow-weight);
+        letter-spacing: var(--type-eyebrow-spacing);
+        text-transform: uppercase;
+    }
+
+    .about-hero h1 {
+        margin-bottom: 1.25rem;
+        font-size: clamp(3.4rem, 8cqi, 6.8rem);
+        line-height: 0.9;
+    }
+
+    .about-hero-lede {
+        max-width: 34rem;
+        margin: 0;
+        font-size: clamp(1.25rem, 2.4cqi, 1.7rem);
+        line-height: 1.45;
+    }
+
+    .about-hero-photo {
+        position: relative;
+        margin: 0;
+    }
+
+    .about-hero-photo::before {
+        position: absolute;
+        z-index: -1;
+        inset: 8% -8% -8% 10%;
+        border-radius: 42% 58% 48% 52%;
+        background: var(--gradient-rainbow);
+        content: "";
+        filter: blur(42px);
+        opacity: 0.22;
+    }
+
+    .about-hero-photo img {
+        display: block;
+        width: 100%;
+        max-height: 560px;
+        aspect-ratio: 4 / 5;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-card);
+        object-fit: cover;
+    }
+
+    .about-section {
+        padding: clamp(4.5rem, 8vw, 7rem) 0;
+        border-top: 1px solid rgba(var(--color-dark-rgb), 0.16);
+    }
+
+    .about-section-heading {
+        display: grid;
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+        align-items: end;
+        gap: clamp(2rem, 6vw, 5rem);
+        margin-bottom: clamp(3rem, 6vw, 5rem);
+    }
+
+    .about-section h2 {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: clamp(2.5rem, 5cqi, 4rem);
+        line-height: 0.98;
+        letter-spacing: -0.035em;
+    }
+
+    .about-section-heading > p,
+    .about-personal-copy > p {
+        margin: 0;
+        font-size: 1.08rem;
+        line-height: 1.7;
+    }
+
+    .about-career-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.25rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .about-career-list li {
+        display: flex;
+        min-height: 285px;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: clamp(1.5rem, 3vw, 2rem);
+        border: 1px solid rgba(var(--color-dark-rgb), 0.12);
+        border-radius: var(--radius-md);
+        background: var(--surface-card);
+        box-shadow: var(--shadow-card);
+    }
+
+    .about-career-number {
+        margin-bottom: 1.4rem;
+        color: var(--color-muted);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .about-career-list h3 {
+        margin: 0 0 0.8rem;
+        font-family: var(--font-display);
+        font-size: 1.55rem;
+        line-height: 1.08;
+    }
+
+    .about-career-list p {
+        margin: 0 0 1.5rem;
+        line-height: 1.6;
+    }
+
+    .about-career-link {
+        margin-top: auto;
+        color: var(--color-accent);
+        font-weight: 700;
+        text-underline-offset: 4px;
+    }
+
+    .about-personal-intro {
+        display: grid;
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+        gap: clamp(2rem, 6vw, 5rem);
+        margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+
+    .about-personal-copy {
+        display: grid;
+        align-content: start;
+        gap: 1.1rem;
+    }
+
+    .about-interest-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        margin: 0.5rem 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .about-interest-list li {
+        padding: 0.4rem 0.7rem;
+        border: 1px solid rgba(var(--color-dark-rgb), 0.14);
+        border-radius: var(--radius-pill);
+        background: rgba(255, 254, 251, 0.72);
+        font-size: 0.8rem;
+        font-weight: 650;
+    }
+
+    .about-gallery {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-auto-rows: 190px;
+        gap: 0.85rem;
+    }
+
+    .about-photo {
+        min-width: 0;
+        overflow: hidden;
+        padding: 0;
+        border: 0;
+        border-radius: var(--radius-md);
+        background: var(--color-media-canvas);
+        box-shadow: var(--shadow-card);
+        cursor: zoom-in;
+    }
+
+    .about-photo:nth-child(1) { grid-column: span 3; }
+    .about-photo:nth-child(2) { grid-column: span 3; }
+    .about-photo:nth-child(3) { grid-column: span 2; }
+    .about-photo:nth-child(4) { grid-column: span 2; }
+    .about-photo:nth-child(5) { grid-column: span 2; }
+
+    .about-photo img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 220ms ease;
+    }
+
+    .about-photo:hover img,
+    .about-photo:focus-visible img {
+        transform: scale(1.035);
+    }
+
+    .about-photo:nth-child(2) img,
+    .about-photo:nth-child(4) img {
+        object-position: center 30%;
+    }
+
+    @container about (max-width: 760px) {
+        .about-hero,
+        .about-section-heading,
+        .about-personal-intro {
+            grid-template-columns: 1fr;
+        }
+
+        .about-hero {
+            min-height: 0;
+        }
+
+        .about-hero-photo {
+            width: min(84%, 390px);
+            justify-self: center;
+        }
+
+        .about-career-list {
+            grid-template-columns: 1fr;
+        }
+
+        .about-career-list li {
+            min-height: 0;
+        }
+
+        .about-gallery {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-auto-rows: 180px;
+        }
+
+        .about-photo:nth-child(n) {
+            grid-column: span 1;
+        }
+
+        .about-photo:first-child {
+            grid-column: 1 / -1;
+        }
+    }
+</style>
+
+<article class="about-page">
+    <header class="about-hero">
+        <div>
+            <p class="about-eyebrow">About Syd</p>
+            <h1>Designer, maker, and systems thinker.</h1>
+            <p class="about-hero-lede">I started in physical product design, built my career leading digital products, and now use interactive media to deepen that core practice.</p>
+        </div>
+
+        <figure class="about-hero-photo">
+            <img src="images/syd-house.png" width="1268" height="1643" alt="Syd smiling in front of their log cabin in Missoula" decoding="async">
+        </figure>
+    </header>
+
+    <section class="about-section" aria-labelledby="about-background-title">
+        <div class="about-section-heading">
+            <div>
+                <p class="about-eyebrow">Background</p>
+                <h2 id="about-background-title">A practice that keeps expanding.</h2>
+            </div>
+            <p>I bring the practical rigor of industrial design to complex digital systems, then keep expanding the ways people can interact with them.</p>
+        </div>
+
+        <ol class="about-career-list">
+            <li>
+                <span class="about-career-number">2016 · Foundation</span>
+                <h3>Started with physical products</h3>
+                <p>Industrial design taught me to balance user needs with materials, form, and manufacturing.</p>
+                <a class="about-career-link" href="#booking-platform">View Campground Booking <span aria-hidden="true">→</span></a>
+            </li>
+            <li>
+                <span class="about-career-number">2018–Present · Core Practice</span>
+                <h3>Lead digital products end to end</h3>
+                <p>I lead research, strategy, design, and delivery across 0→1 products and evolving systems.</p>
+                <a class="about-career-link" href="#va-pdfs">View PDF Digitization <span aria-hidden="true">→</span></a>
+            </li>
+            <li>
+                <span class="about-career-number">2025–Present · Expanding</span>
+                <h3>Add new forms of interaction</h3>
+                <p>My MFA is adding Unity, spatial design, and play to the product thinking I bring to professional work.</p>
+                <a class="about-career-link" href="#scheduling-product-creation">View Scheduling Product <span aria-hidden="true">→</span></a>
+            </li>
+        </ol>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-personal-title" data-gallery-page>
+        <div class="about-personal-intro">
+            <div>
+                <p class="about-eyebrow">Beyond the work</p>
+                <h2 id="about-personal-title">A little about me.</h2>
+            </div>
+
+            <div class="about-personal-copy">
+                <p>I’m a proud trans/nonbinary designer (they/them) living in a little log cabin in Missoula, MT with my black cat, Olive.</p>
+                <p>I’m happiest outside with my partner, Carly—skiing, rollerblading, or traveling in my Scamp trailer.</p>
+
+                <ul class="about-interest-list" aria-label="Interests">
+                    <li><span aria-hidden="true">⛷️</span> Skiing</li>
+                    <li><span aria-hidden="true">🎨</span> Painting</li>
+                    <li><span aria-hidden="true">🪟</span> Stained glass</li>
+                    <li><span aria-hidden="true">🕹️</span> Game design</li>
+                    <li><span aria-hidden="true">⛺</span> Camping</li>
+                    <li><span aria-hidden="true">🌱</span> Gardening</li>
+                    <li><span aria-hidden="true">✈️</span> Traveling</li>
+                    <li><span aria-hidden="true">🛼</span> Rollerblading</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="about-gallery" aria-label="Life beyond design" data-gallery>
+            <button class="about-photo" type="button" data-gallery-item>
+                <img src="images/syd-and-carly-traveling.jpeg" width="5712" height="4284" alt="Syd and their partner, Carly, smiling together in front of a waterfall while traveling" loading="lazy" decoding="async">
+            </button>
+            <button class="about-photo" type="button" data-gallery-item>
+                <img src="images/olive.png" width="2113" height="1511" alt="Olive, Syd’s black cat, lying down with wide curious eyes" loading="lazy" decoding="async">
+            </button>
+            <button class="about-photo" type="button" data-gallery-item>
+                <img src="images/syd-house.png" width="1268" height="1643" alt="Syd smiling in front of their log cabin in Missoula" loading="lazy" decoding="async">
+            </button>
+            <button class="about-photo" type="button" data-gallery-item>
+                <img src="images/syd-skiing.png" width="2147" height="1615" alt="Syd posing on skis above a snowy Montana valley" loading="lazy" decoding="async">
+            </button>
+            <button class="about-photo" type="button" data-gallery-item>
+                <img src="images/syd-and-carly-rollerblading.jpeg" width="4896" height="3672" alt="Syd and Carly smiling in helmets while rollerblading together at sunset" loading="lazy" decoding="async">
+            </button>
+        </div>
+
+        <dialog class="gallery-lightbox" data-gallery-dialog aria-label="Life beyond design photo viewer">
+            <button class="gallery-lightbox-close" type="button" data-gallery-close aria-label="Close full-screen image">&times;</button>
+            <button class="gallery-lightbox-nav" type="button" data-gallery-previous aria-label="Previous image">&#8592;</button>
+            <figure>
+                <img data-gallery-image alt="">
+                <figcaption data-gallery-counter aria-live="polite"></figcaption>
+            </figure>
+            <button class="gallery-lightbox-nav" type="button" data-gallery-next aria-label="Next image">&#8594;</button>
+        </dialog>
+    </section>
+</article>
