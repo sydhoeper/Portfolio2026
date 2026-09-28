@@ -1,11 +1,10 @@
 const contentArea = document.querySelector("#main-content");
 const navigationLinks = document.querySelectorAll("[data-page]");
-const sidebar = document.querySelector(".sidebar");
+const sidebar = document.querySelector(".top-navigation");
 const navigationMenu = document.querySelector("#navigation-menu");
 const mobileNavigationToggle = document.querySelector(".mobile-nav-toggle");
 const mobileNavigationOverlay = document.querySelector(".mobile-nav-overlay");
 const siteFooter = document.querySelector(".site-footer");
-const mobileNavigationQuery = window.matchMedia("(max-width: 850px)");
 let pageLoadRequest = 0;
 let homeRibbonController = null;
 let toastTimer = null;
@@ -25,7 +24,7 @@ function setMobileNavigation(isOpen, { restoreFocus = false } = {}) {
         return;
     }
 
-    const shouldOpen = mobileNavigationQuery.matches && isOpen;
+    const shouldOpen = isOpen;
 
     document.body.classList.toggle("mobile-navigation-open", shouldOpen);
     mobileNavigationToggle.setAttribute("aria-expanded", String(shouldOpen));
@@ -33,12 +32,12 @@ function setMobileNavigation(isOpen, { restoreFocus = false } = {}) {
         "aria-label",
         shouldOpen ? "Close navigation menu" : "Open navigation menu"
     );
-    navigationMenu.hidden = mobileNavigationQuery.matches && !shouldOpen;
+    navigationMenu.hidden = !shouldOpen;
     mobileNavigationOverlay.setAttribute("aria-hidden", String(!shouldOpen));
     contentArea.inert = shouldOpen;
     siteFooter.inert = shouldOpen;
 
-    if (restoreFocus && mobileNavigationQuery.matches) {
+    if (restoreFocus) {
         mobileNavigationToggle.focus();
     }
 }
@@ -92,9 +91,6 @@ function initializeMobileNavigation() {
         }
     });
 
-    mobileNavigationQuery.addEventListener("change", () => {
-        setMobileNavigation(false);
-    });
 }
 
 function initializeSparkleTrail() {
@@ -195,6 +191,7 @@ async function loadPage(pageName, { focusContent = false } = {}) {
             initializeMapAnimations(contentArea);
             initializeGameAudioControls(contentArea);
             initializeHomeRibbon(contentArea);
+            initializeFeaturedWork(contentArea);
             initializeCopyEmail(contentArea);
             finishPageLoad(pageName, focusContent);
         });
@@ -206,6 +203,23 @@ async function loadPage(pageName, { focusContent = false } = {}) {
         showNotFound(pageName, focusContent);
         console.error(error);
     }
+}
+
+function initializeFeaturedWork(root = document) {
+    const button = root.querySelector("[data-show-more-projects]");
+    const additionalProjects = root.querySelector("#additional-featured-projects");
+
+    if (!button || !additionalProjects) {
+        return;
+    }
+
+    button.addEventListener("click", () => {
+        const isExpanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!isExpanded));
+        additionalProjects.hidden = isExpanded;
+        button.querySelector("span:first-child").textContent = isExpanded ? "Show More" : "Show Less";
+        button.querySelector("[aria-hidden='true']").textContent = isExpanded ? "+" : "−";
+    });
 }
 
 function finishPageLoad(pageName, focusContent) {
