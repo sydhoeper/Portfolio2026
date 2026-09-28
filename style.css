@@ -1985,9 +1985,20 @@ body::before {
 }
 
 .navigation-caret {
-    font-size: 1.05rem;
-    line-height: 0.7;
+    display: block;
+    width: 12px;
+    height: 8px;
+    flex: 0 0 auto;
+    overflow: visible;
     transition: transform 180ms ease;
+}
+
+.navigation-caret path {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.75;
 }
 
 .mobile-navigation-open .navigation-caret {
@@ -2031,8 +2042,10 @@ body::before {
 }
 
 .top-navigation .site-title-name {
+    display: block;
     font-size: 26px;
     line-height: 1;
+    transform: translateY(1px);
 }
 
 .top-navigation .navigation-menu {
