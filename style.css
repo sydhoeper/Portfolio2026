@@ -1891,15 +1891,16 @@ body::before {
 
 .top-navigation .navigation {
     position: relative;
-    width: fit-content;
+    width: 100%;
 }
 
 .top-navigation .navigation-header {
     display: flex;
-    min-height: 68px;
+    min-height: 58px;
     align-items: center;
-    gap: 0.7rem;
-    padding: 8px 20px 8px 10px;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 6px 9px 6px 22px;
     border: 1px solid rgba(var(--color-dark-rgb), 0.12);
     border-radius: var(--radius-pill);
     background: rgba(255, 254, 251, 0.92);
@@ -1910,8 +1911,8 @@ body::before {
 .top-navigation .mobile-nav-toggle {
     position: relative;
     display: grid;
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
     flex: 0 0 auto;
     padding: 0;
     border: 0;
@@ -1962,13 +1963,14 @@ body::before {
 }
 
 .top-navigation .site-title-name {
-    font-size: 28px;
+    font-size: 26px;
 }
 
 .top-navigation .navigation-menu {
     position: absolute;
     top: calc(100% + 12px);
-    left: 0;
+    right: 0;
+    left: auto;
     display: block;
     width: min(420px, calc(100vw - 40px));
     max-height: calc(100dvh - 125px);
@@ -2079,13 +2081,13 @@ body.mobile-navigation-open {
     }
 
     .top-navigation .navigation-header {
-        min-height: 62px;
-        padding: 6px 18px 6px 8px;
+        min-height: 56px;
+        padding: 6px 8px 6px 18px;
     }
 
     .top-navigation .mobile-nav-toggle {
-        width: 48px;
-        height: 48px;
+        width: 44px;
+        height: 44px;
     }
 
     .top-navigation .navigation-menu {
