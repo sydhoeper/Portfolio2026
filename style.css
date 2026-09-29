@@ -1701,9 +1701,35 @@ body:has(.gallery-lightbox[open]) {
 }
 
 .featured-case-card > img {
+    max-width: none;
+    margin: 0;
     object-fit: cover;
     object-position: center top;
     background: var(--color-media-canvas);
+}
+
+.featured-case-card > img.featured-visual-va,
+.featured-case-card > img.featured-visual-search,
+.featured-case-card > img.featured-visual-map {
+    padding: clamp(1rem, 2.5vw, 2rem);
+    object-fit: contain;
+    object-position: center;
+}
+
+.featured-case-card > img.featured-visual-va {
+    background: linear-gradient(145deg, #e7edf3, #d7e6f1);
+}
+
+.featured-case-card > img.featured-visual-search {
+    background: linear-gradient(145deg, #e8f1eb, #dbe9f3);
+}
+
+.featured-case-card > img.featured-visual-booking {
+    object-position: center;
+}
+
+.featured-case-card > img.featured-visual-map {
+    background: linear-gradient(145deg, #eee8f7, #dceee7);
 }
 
 .featured-case-metric {
@@ -1783,6 +1809,12 @@ body:has(.gallery-lightbox[open]) {
     .featured-case-metric {
         height: 220px;
         min-height: 0;
+    }
+
+    .featured-case-card > img.featured-visual-va,
+    .featured-case-card > img.featured-visual-search,
+    .featured-case-card > img.featured-visual-map {
+        padding: 1rem;
     }
 }
 
