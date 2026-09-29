@@ -199,8 +199,7 @@
         padding-bottom: clamp(3.5rem, 7vw, 6rem);
     }
 
-    .snapshot-card,
-    .practice-card {
+    .snapshot-card {
         padding: var(--card-padding);
         border-radius: var(--card-radius);
         background: var(--surface-card);
@@ -260,20 +259,41 @@
     }
 
     .practice-grid {
+        position: relative;
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: clamp(1rem, 3vw, 1.75rem);
+        gap: clamp(2rem, 5vw, 4.5rem);
+    }
+
+    .practice-grid::before {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        top: 1.2rem;
+        right: 1.2rem;
+        left: 1.2rem;
+        height: 2px;
+        background: rgba(var(--color-dark-rgb), 0.28);
     }
 
     .practice-card {
-        min-height: 180px;
+        position: relative;
+        z-index: 1;
+        min-width: 0;
         text-align: left;
     }
 
     .practice-card .practice-number {
-        display: block;
-        margin-bottom: 1rem;
-        color: var(--color-muted);
+        display: inline-flex;
+        width: 2.4rem;
+        height: 2.4rem;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.4rem;
+        border: 1px solid rgba(var(--color-dark-rgb), 0.38);
+        border-radius: 50%;
+        background: var(--color-background);
+        color: var(--color-dark);
         font-size: var(--type-eyebrow-size);
         font-weight: var(--type-eyebrow-weight);
         letter-spacing: var(--type-eyebrow-spacing);
@@ -532,14 +552,42 @@
             font-size: 1.12rem;
         }
 
-        .home-snapshot,
-        .practice-grid {
+        .home-snapshot {
             grid-template-columns: 1fr;
         }
 
-        .snapshot-card,
-        .practice-card {
+        .snapshot-card {
             min-height: 0;
+        }
+
+        .practice-grid {
+            grid-template-columns: 1fr;
+            gap: 2.25rem;
+        }
+
+        .practice-grid::before {
+            top: 1.2rem;
+            right: auto;
+            bottom: 1.2rem;
+            left: 1.2rem;
+            width: 2px;
+            height: auto;
+        }
+
+        .practice-card {
+            display: grid;
+            grid-template-columns: 2.4rem minmax(0, 1fr);
+            column-gap: 1.25rem;
+        }
+
+        .practice-card .practice-number {
+            grid-row: 1 / span 2;
+            margin-bottom: 0;
+        }
+
+        .practice-card h3,
+        .practice-card p {
+            grid-column: 2;
         }
 
     }
@@ -612,18 +660,18 @@
             </p>
         </div>
 
-        <div class="practice-grid">
-            <article class="practice-card">
+        <div class="practice-grid" role="list" aria-label="Leadership process">
+            <article class="practice-card" role="listitem">
                 <span class="practice-number">01</span>
                 <h3>Frame the opportunity</h3>
                 <p>Turn a loose brief into a clear direction grounded in people, goals, and technical reality.</p>
             </article>
-            <article class="practice-card">
+            <article class="practice-card" role="listitem">
                 <span class="practice-number">02</span>
                 <h3>Make the vision buildable</h3>
                 <p>Define the flows, systems, prototypes, and production plan the team can execute.</p>
             </article>
-            <article class="practice-card">
+            <article class="practice-card" role="listitem">
                 <span class="practice-number">03</span>
                 <h3>Lead it through launch</h3>
                 <p>Align collaborators, resolve details, and protect the whole experience through QA and delivery.</p>
