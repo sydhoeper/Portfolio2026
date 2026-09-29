@@ -336,7 +336,7 @@ function initializeCopyEmail(root = document) {
                 }
             }
 
-            showToast(copied ? "Email address copied" : `Couldn’t copy. Email: ${emailAddress}`, button);
+            showToast(copied ? `${emailAddress} copied to clipboard` : `Couldn’t copy. Email: ${emailAddress}`, button);
         });
     });
 }
