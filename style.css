@@ -1823,7 +1823,6 @@ body:has(.gallery-lightbox[open]) {
     margin: clamp(3rem, 7vw, 5.5rem) 0;
     padding: clamp(3rem, 6vw, 5rem) 0;
     border-top: 1px solid rgba(var(--color-dark-rgb), 0.16);
-    border-bottom: 1px solid rgba(var(--color-dark-rgb), 0.16);
 }
 
 .case-study-brief-header {
