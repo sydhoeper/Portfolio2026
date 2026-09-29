@@ -37,14 +37,14 @@
     <link rel="icon" type="image/png" sizes="192x192" href="favicon-192x192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
-    <link rel="stylesheet" href="style.css?v=77">
+    <link rel="stylesheet" href="style.css?v=80">
 </head>
 
 <body>
 
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
-    <header class="top-navigation">
+    <aside class="sidebar">
 
         <nav class="navigation">
             <div class="navigation-header">
@@ -52,42 +52,39 @@
                     <span class="site-title-name">Syd Hoeper</span>
                 </a>
 
-                <div class="navigation-actions">
-                    <button class="mobile-nav-toggle nav-action" type="button" aria-expanded="false" aria-controls="navigation-menu" aria-label="Open case studies menu">
-                        <span>Case Studies</span>
-                        <svg class="navigation-caret" viewBox="0 0 12 8" aria-hidden="true" focusable="false">
-                            <path d="M1 1.25 6 6.25 11 1.25"></path>
-                        </svg>
-                    </button>
-                    <a class="nav-action" href="#about" data-page="about">About</a>
-                    <a class="nav-action resume-nav-link" href="documents/syd-hoeper-resume.pdf?v=3" target="_blank" rel="noopener noreferrer">Resume<span class="visually-hidden"> (opens in a new tab)</span></a>
-                </div>
+                <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="navigation-menu" aria-label="Open navigation menu">
+                    <span class="mobile-nav-icon" aria-hidden="true"></span>
+                </button>
             </div>
 
             <div class="navigation-menu" id="navigation-menu">
                 <div class="intro-links"></div>
 
                 <section class="navigation-group">
-                    <p class="navigation-subgroup">Product case studies</p>
+                    <h2>User Experience Design<span class="navigation-heading-icon" aria-hidden="true">🗺️</span></h2>
+
+                    <p class="navigation-subgroup">0→1 Products</p>
 
                     <a href="#va-pdfs" data-page="va-pdfs">
                         VA Health Care Application
-                    </a>
-
-                    <a href="#search-redesign" data-page="search-redesign">
-                        Roadtrippers Search Results
                     </a>
 
                     <a href="#booking-platform" data-page="booking-platform">
                         Campendium Booking
                     </a>
 
+                    <a href="#scheduling-product-creation" data-page="scheduling-product-creation">
+                        Fire-Service Scheduling
+                    </a>
+
+                    <p class="navigation-subgroup">Product Improvements</p>
+
                     <a href="#map-redesign" data-page="map-redesign">
                         Campendium Map Layers
                     </a>
 
-                    <a href="#scheduling-product-creation" data-page="scheduling-product-creation">
-                        Fire-Service Scheduling
+                    <a href="#search-redesign" data-page="search-redesign">
+                        Roadtrippers Search Results
                     </a>
 
                 </section>
@@ -96,7 +93,7 @@
 
         </nav>
 
-    </header>
+    </aside>
 
     <div class="mobile-nav-overlay" aria-hidden="true"></div>
 
@@ -115,7 +112,7 @@
         </button>
     </footer>
 
-    <script src="script.js?v=42"></script>
+    <script src="script.js?v=43"></script>
 
 </body>
 </html>
