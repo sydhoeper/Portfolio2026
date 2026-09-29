@@ -11,7 +11,7 @@ let homeRibbonController = null;
 let toastTimer = null;
 
 const pageMap = {
-    home: "pages/home.html?v=8",
+    home: "pages/home.html?v=9",
     about: "pages/about.html",
     "va-pdfs": "pages/User Experience Design/va-pdfs.html",
     "booking-platform": "pages/User Experience Design/booking-platform.html",
