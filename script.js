@@ -13,11 +13,11 @@ let toastTimer = null;
 const pageMap = {
     home: "pages/home.html?v=17",
     about: "pages/about.html",
-    "va-pdfs": "pages/User Experience Design/va-pdfs.html",
-    "booking-platform": "pages/User Experience Design/booking-platform.html",
-    "map-redesign": "pages/User Experience Design/map-redesign.html",
-    "search-redesign": "pages/User Experience Design/search-update.html",
-    "scheduling-product-creation": "pages/User Experience Design/scheduling-product-creation.html",
+    "va-pdfs": "pages/User Experience Design/va-pdfs.html?v=2",
+    "booking-platform": "pages/User Experience Design/booking-platform.html?v=2",
+    "map-redesign": "pages/User Experience Design/map-redesign.html?v=2",
+    "search-redesign": "pages/User Experience Design/search-update.html?v=2",
+    "scheduling-product-creation": "pages/User Experience Design/scheduling-product-creation.html?v=2",
     "local-design-system": "pages/User Experience Design/local-design-system.html"
 };
 
