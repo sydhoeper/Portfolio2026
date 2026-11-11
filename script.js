@@ -11,6 +11,7 @@ let homeRibbonController = null;
 let toastTimer = null;
 
 const pageMap = {
+    "vr-immunization": "pages/vr-immunization.html",
     home: "pages/home.html?v=17",
     about: "pages/about.html",
     "va-pdfs": "pages/User Experience Design/va-pdfs.html?v=2",
@@ -233,7 +234,7 @@ function finishPageLoad(pageName, focusContent) {
 
     contentArea.setAttribute("aria-busy", "false");
     updateActiveLink(pageName);
-    document.title = "Syd Hoeper";
+    document.title = pageName === "vr-immunization" ? "VR Immunization | Syd Hoeper" : "Syd Hoeper";
     window.scrollTo(0, 0);
 
     if (focusContent) {
